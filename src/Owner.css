@@ -1,0 +1,27 @@
+.user-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    /* Remove underline */
+}
+
+.profile-image {
+    width: 40px;
+    /* Adjust the size as needed */
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    /* Space between image and name */
+}
+
+.user-name {
+    color: #000;
+    /* Adjust the color as needed */
+    font-weight: bold;
+    /* Optional: Make the text bold */
+}
+
+.user-link:hover .user-name {
+    color: #007BFF;
+    /* Optional: Change color on hover */
+}

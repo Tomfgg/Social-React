@@ -1,0 +1,11 @@
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    /* Optional: Adjust padding as needed */
+}
+
+.post-header>* {
+    flex: 0 1 auto;
+}

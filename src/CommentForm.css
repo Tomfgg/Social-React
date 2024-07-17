@@ -1,0 +1,42 @@
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.comment-form .form-group {
+    margin-bottom: 10px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.comment-form input[type="file"] {
+    display: block;
+}
+
+.comment-form .submit-button {
+    align-self: flex-end;
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comment-form .submit-button:hover {
+    background-color: #0056b3;
+}
+

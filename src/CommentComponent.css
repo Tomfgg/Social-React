@@ -1,0 +1,67 @@
+/* Comment container */
+.comment-container {
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    background-color: #ffffff;
+    max-width: 300px;
+    margin: 30px auto;
+    position: relative;
+}
+
+/* Comment description */
+.comment-description {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Comment image */
+.comment-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+/* Likes and comments container */
+.likes-comments-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+/* Likes container */
+.likes-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Likes count */
+.likes-count {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Like icon */
+.like-icon {
+    color: blue;
+    margin-left: 4px;
+    cursor: pointer;
+}
+
+/* Comments count */
+.comments-count {
+    font-size: 14px;
+    color: #333;
+}
+
+.actions-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+    gap: 80px;
+    /* Adjust this value for the desired space between the like button and the comment button */
+}

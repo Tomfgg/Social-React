@@ -1,0 +1,77 @@
+/* Navbar container */
+.navbar {
+    background-color: #333;
+    padding: 1rem;
+}
+
+/* Navbar list */
+.nav-list {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar list items */
+
+
+/* Navbar links */
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ddd;
+}
+
+/* Navbar button */
+.nav-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #0056b3;
+}
+
+/* Navbar user display */
+
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    /* Optional: Adjust the gap between the image and the link */
+    padding: 10px;
+}
+
+.profile-image {
+    width: 40px;
+    /* Adjust the size as needed */
+    height: 40px;
+    border-radius: 50%;
+}
+
+.nav-user {
+    text-decoration: none;
+    color: #e8e8e8;
+    /* Adjust the color as needed */
+    font-weight: bold;
+    /* Optional: Make the text bold */
+}
+
+.nav-item:hover .nav-user {
+    color: #007BFF;
+    /* Optional: Change color on hover */
+}
