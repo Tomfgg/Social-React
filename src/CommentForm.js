@@ -39,9 +39,11 @@ const CommentForm = ({ postId, handleAddedComment }) => {
             }
 
             const addedComment = await response.json();
+            console.log(currentUser.image)
             addedComment.user_id = {
                 _id: currentUser._id,
-                name: currentUser.name
+                name: currentUser.name,
+                image: currentUser.image.replace("http://127.0.0.1:5000/profileImage/", "")
             }
             console.log(addedComment);
             // Handle success (e.g., clear the form, show a success message, etc.)

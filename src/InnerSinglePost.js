@@ -70,7 +70,7 @@ export default function InnerSinglePost({ post, setLikes, setIsLiked, setId ,set
 
     return (
         <div className="post-container">
-            <Owner theUser={post.user_id} settings={'post'}/>
+            <Owner theUser={post.user_id} date={post.createdAt} settings={'post'}/>
             {/* {(currentUser._id === post.user_id?._id || !post.user_id) && <DropdownButton settings={'post'} />} */}
             <p className="post-description">{post.describtion}</p>
             {post.images.length > 0 &&<img src={post.images[0]} alt="Post" className="post-image" />}

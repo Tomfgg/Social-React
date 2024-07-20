@@ -70,7 +70,7 @@ export default function SingleReply({ replySent, setId, setSymbol, setIsReplyFor
     else return (
         <div className="comment-container">
             <div className="post-header">
-                <Owner theUser={reply.user_id} settings={'reply'} />
+                <Owner theUser={reply.user_id} date={reply.createdAt} settings={'reply'} />
                 {(currentUser._id === reply.user_id?._id || !reply.user_id) && <DropdownButton setEditable={setEditable} handleDelete={handleDeleteReply} settings={'reply'} />}
             </div>
 

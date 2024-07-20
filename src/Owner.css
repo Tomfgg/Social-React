@@ -14,11 +14,26 @@
     /* Space between image and name */
 }
 
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
 .user-name {
     color: #000;
     /* Adjust the color as needed */
     font-weight: bold;
     /* Optional: Make the text bold */
+    margin: 0;
+}
+
+.user-date {
+    color: #777;
+    /* Adjust the color as needed */
+    font-size: 12px;
+    /* Optional: Adjust the font size */
+    margin: 0;
+    /* Remove default margin */
 }
 
 .user-link:hover .user-name {

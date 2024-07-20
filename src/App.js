@@ -45,7 +45,7 @@ function App() {
 // Wrapper component to extract the id from URL and pass it as a prop
 const UserProfileWrapper = () => {
   const { id } = useParams();
-  return <UserProfile id={id} />;
+  return <UserProfile key={id} id={id} />;
 };
 
 const PostFormEditWrapper = ()=>{

@@ -26,7 +26,7 @@ export default function SinglePost({ post, postsSetter }) {
     // const [skip, setSkip] = useState(0)
     // const [toFetch,setToFetch] = useState(false)
     // console.log(post.user_id.image)
-    console.log(post._id)
+    console.log(post)
     console.log(comments)
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -118,7 +118,8 @@ export default function SinglePost({ post, postsSetter }) {
     return (
         <div className="post-container">
             <div className="post-header">
-                <Owner theUser={post.user_id ? post.user_id:currentUser} />
+                <Owner theUser={post.user_id ? post.user_id:null} date={post.createdAt}/>
+                {/* {post.createdAt && <div>{formatRelativeDate(post.createdAt)}</div>} */}
                 {(currentUser._id === post.user_id?._id || !post.user_id) &&
                     <DropdownButton settings={'post'} id={post._id} handleDelete={handleDeletePost} />}
             </div>

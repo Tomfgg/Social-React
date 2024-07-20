@@ -3,8 +3,11 @@ import { AuthContext } from "./AuthProvider"
 import PostsList from "./PostsList"
 import './UserHeader.css';
 import DropdownButton from "./DropdownButton";
+import defaultProfileImage from './assets/profile.webp' 
 
 export default function UserProfile({ id, sentUser }) {
+    console.log(id)
+    console.log(sentUser)
     const { currentUser } = useContext(AuthContext)
     const whosePosts = sentUser ? 'my/get' : `user/${id}`
     if (!currentUser) return null
@@ -23,11 +26,15 @@ function UserHeader({ id, sentUser }) {
     const { AuthToken, currentUser, setCurrentUser } = useContext(AuthContext)
     const [user, setUser] = useState(null)
     console.log(user)
+    console.log(sentUser)
     if (sentUser) {
         return (
             <div className="user-header">
-                <div>{sentUser.name}</div>
-                <div>{sentUser.friends} Friends</div>
+                <img src={sentUser.image ? sentUser.image : defaultProfileImage} alt="Profile" />
+                <div className="user-info">
+                    <div className="user-name">{sentUser.name}</div>
+                    <div className="user-friends">{sentUser.friends} Friends</div>
+                </div>
                 <DropdownButton settings={'user'} />
             </div>
         );
@@ -76,22 +83,31 @@ function UserHeader({ id, sentUser }) {
             console.log(response)
             setUser(response)
         }
-        if (!user) { fetchUser() }
+
+        if (!user) { 
+            fetchUser() 
+            return null
+        }
+
         console.log(user)
         return (
-            <div className="user-header">
-                <div>{user ? user.name : 'Loading...'}</div>
-                {user && user.relation === 'friend' && <button className="friend">Friend</button>}
-                {user && user.relation === 'isent' && <button className="cancel-request">Cancel Request</button>}
-                {user && user.relation === 'ireceived' && (
-                    <div>
-                        <button onClick={handleAcceptFriend} className="accept">Accept friend request</button>
-                        <button onClick={handleRejectFriend} className="reject">Reject friend request</button>
-                    </div>
-                )}
-                {user && user.relation === 'none' && <button onClick={handleAddFriend} className="add-friend">Add Friend</button>}
+        <div className="user-header">
+                <img src={user && user.image ? `http://127.0.0.1:5000/profileImage/${user.image}` : defaultProfileImage} alt="Profile" />
+            <div className="user-info">
+                <div className="user-name">{user ? user.name : 'Loading...'}</div>
+                    {user && user.relation === 'friend' && <button className="friend">Friend</button>}
+                    {user && user.relation === 'isent' && <button className="cancel-request">Cancel Request</button>}
+                    {user && user.relation === 'ireceived' && (
+                        <div>
+                            <button onClick={handleAcceptFriend} className="accept">Accept friend request</button>
+                            <button onClick={handleRejectFriend} className="reject">Reject friend request</button>
+                        </div>
+                    )}
+                    {user && user.relation === 'none' && <button onClick={handleAddFriend} className="add-friend">Add Friend</button>}
             </div>
-        );
+            
+        </div>
+    );
     }
 }
 

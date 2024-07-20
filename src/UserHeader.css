@@ -1,51 +1,94 @@
 .user-header {
-    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
     padding: 20px;
-    border-radius: 10px;
-    max-width: 600px;
-    margin: auto;
-    margin-top: 50px;
-    text-align: center;
     background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
 }
 
-.user-header div {
-    margin-bottom: 10px;
-    font-size: 1.2em;
+.user-header img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+    border: 2px solid #e0e0e0;
+}
+
+.user-header .user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 50px;
+}
+
+.user-header .user-info .user-name {
+    font-size: 40px;
+    font-weight: bold;
     color: #333;
+    margin-bottom: 5px;
+}
+
+.user-header .user-info .user-friends {
+    font-size: 25px;
+    color: #777;
 }
 
 .user-header button {
-    margin: 5px;
-    padding: 10px 20px;
+    margin-left: 10px;
+    padding: 10px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1em;
-    color: white;
+    font-size: 14px;
+    color: #fff;
 }
 
-.user-header button.friend {
-    background-color: #dc3545;
-    /* red */
-}
-
-.user-header button.cancel-request {
-    background-color: #ffc107;
-    /* yellow */
-}
-
-.user-header button.accept {
+.user-header .friend {
     background-color: #28a745;
-    /* green */
 }
 
-.user-header button.reject {
-    background-color: #dc3545;
-    /* red */
+.user-header .cancel-request {
+    background-color: #ffc107;
 }
 
-.user-header button.add-friend {
+.user-header .accept {
     background-color: #007bff;
-    /* blue */
+}
+
+.user-header .reject {
+    background-color: #dc3545;
+}
+
+.user-header .add-friend {
+    background-color: #17a2b8;
+}
+
+.user-header .dropdown-button {
+    margin-left: auto;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .user-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .user-header img {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .user-header .user-info {
+        margin-right: 0;
+    }
+
+    .user-header button {
+        margin-left: 0;
+        margin-top: 10px;
+    }
 }

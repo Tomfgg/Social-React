@@ -82,7 +82,7 @@ export default function SingleComment({ commentSent, setId, setSymbol, commentsS
     else return (
         <div className="comment-container">
             <div className="post-header">
-                <Owner theUser={comment.user_id} settings={'comment'} />
+                <Owner theUser={comment.user_id} date={comment.createdAt} settings={'comment'} />
                 {(currentUser._id === comment.user_id?._id || !comment.user_id) && <DropdownButton setEditable={setEditable} handleDelete={handleDeleteComment}
                     settings={'comment'} />}
             </div>

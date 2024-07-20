@@ -45,7 +45,8 @@ const ReplyForm = ({ commentId, handleAddedReply, user, setIsReplyFormVisible })
             const addedReply = await response.json();
             addedReply.user_id = {
                 _id: currentUser._id,
-                name: currentUser.name
+                name: currentUser.name,
+                image: currentUser.image.replace("http://127.0.0.1:5000/profileImage/", "")
             }
             console.log(addedReply);        
             // Handle success (e.g., clear the form, show a success message, etc.)

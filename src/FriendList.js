@@ -18,7 +18,7 @@ export default function FriendList({ option }) {
                     Authorization: `Bearer ${AuthToken}`
                 }
             }) :
-                await fetch('http://127.0.0.1:5000/friends/received', {
+                await fetch('http://127.0.0.1:5000/friends/received', { 
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${AuthToken}`
@@ -46,6 +46,7 @@ export default function FriendList({ option }) {
 }
 
 function SingleUserRecord({ user, option }) {
+    console.log(user)
     const [theUser, setTheUser] = useState(user)
     const { AuthToken, currentUser, setCurrentUser } = useContext(AuthContext)
     const [deleted, setDeleted] = useState(false)
@@ -75,7 +76,7 @@ function SingleUserRecord({ user, option }) {
     return (
         <div>
             <div className="friends-header">
-                <Owner user={theUser} />
+                <Owner theUser={theUser} />
                 {option === 'friends' && (deleted ? <div>has been removed from your friend list</div> :
                     <DropdownButton setDeleted={setDeleted} settings={'friends'} id={theUser._id} />)}
 
