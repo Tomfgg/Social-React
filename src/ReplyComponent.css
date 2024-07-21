@@ -1,5 +1,5 @@
-/* Comment container */
-.comment-container {
+/* Reply container */
+.reply-container {
     border: 1px solid #e0e0e0;
     padding: 12px;
     border-radius: 8px;
@@ -7,22 +7,45 @@
     background-color: #fff;
     max-width: 600px;
     margin: 30px auto;
+    margin-left: 50px;
     position: relative;
     color: #333;
 }
 
-/* Post header */
-.post-header {
+/* Reply header */
+.reply-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 8px;
 }
 
-/* Comment description */
-.comment-description {
-    font-size: 16px;
+/* Reply content */
+.reply-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+/* Link styling */
+.reply-link {
+    color: #1877f2;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 5px;
+    /* Space between link and text */
+}
+
+.reply-link:hover {
+    text-decoration: underline;
+}
+
+/* Description styling */
+.reply-description {
+    margin: 0;
     color: #333;
+    display: inline;
+    /* Ensure the paragraph is inline */
     max-width: 100%;
     word-wrap: break-word;
     /* Breaks long words onto the next line */
@@ -30,19 +53,18 @@
     /* Ensures any long words break at any character to fit the line */
     overflow-wrap: break-word;
     /* Ensures any long text breaks properly */
-    margin-bottom: 12px;
 }
 
-/* Comment image */
-.comment-image1 {
+/* Reply image */
+.reply-image {
     width: 50%;
     height: auto;
     border-radius: 15px;
     margin-bottom: 12px;
 }
 
-/* Actions container */
-.actions-container {
+/* Reply actions */
+.reply-actions {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,41 +75,35 @@
 }
 
 /* Likes and comments container */
-.likes-comments-container {
+.reply-likes-comments {
     display: flex;
     justify-content: space-between;
     margin-top: 8px;
 }
 
 /* Likes container */
-.likes-container {
+.reply-likes-container {
     display: flex;
     align-items: center;
     color: #333;
 }
 
 /* Likes count */
-.likes-count {
+.reply-likes-count {
     margin: 0;
     font-size: 14px;
     color: #333;
 }
 
 /* Like icon */
-.like-icon {
+.reply-like-icon {
     color: #1877f2;
     margin-left: 4px;
     cursor: pointer;
 }
 
-/* Comments count */
-.comments-count {
-    font-size: 14px;
-    color: #333;
-}
-
 /* Like button */
-.like-button {
+.reply-button {
     background: none;
     border: none;
     color: #1877f2;
@@ -95,22 +111,4 @@
     display: flex;
     align-items: center;
     font-size: 16px;
-}
-
-/* Reply button */
-.comments-button {
-    background: none;
-    border: none;
-    color: #1877f2;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-/* Show replies */
-.show-replies {
-    color: #1877f2;
-    cursor: pointer;
-    margin-top: 8px;
-    text-align: center;
-    /* Center the text */
 }

@@ -35,6 +35,7 @@ function App() {
         <Route path="/postForm" element={isAuth ? <PostForm /> : <Navigate to="/Login" />} />
         <Route path="/postForm/:id/edit" element={isAuth ? <PostFormEditWrapper /> : <Navigate to="/Login" />} />
         <Route path="/profile/edit" element={isAuth ? <ProfileFormEdit /> : <Navigate to="/Login" />} />
+        <Route path="/search" element={isAuth ? <FriendList key={'search'} option={'users'}/> : <Navigate to="/Login" />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

@@ -5,7 +5,7 @@ import CommentsList from "./CommentsList"
 import { AuthContext } from "./AuthProvider"
 import Owner from "./Owner"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faComment } from '@fortawesome/free-solid-svg-icons';
 import './PostComponent.css';
 import PostModal from "./PostModal"
 import InnerSinglePost from "./InnerSinglePost"
@@ -144,9 +144,9 @@ export default function SinglePost({ post, postsSetter }) {
 
             {/* {reacts && <ReactedUsers reacts={reacts} />} */}
 
-            <div className="actions-container">
+            <div className="actions-container"> 
                 <LikeButton isLiked={isLiked} setIsLiked={setIsLiked} id={post._id} setLikes={setLikes} likes={likes} symbol={'Post'} />
-                <button onClick={openModal} className="comments-button">Comment</button>
+                <div onClick={openModal} className="comments-button">Comment</div>  
             </div>
             {/* <CommentsList comments={comments} /> */}
 
@@ -154,8 +154,15 @@ export default function SinglePost({ post, postsSetter }) {
                 <InnerSinglePost post={{ ...post, likes, liked: isLiked }} setIsLiked={setIsLiked} setLikes={setLikes} setId={setId} setSymbol={setSymbol} />
                 <CommentsList setComments={setComments} comments={comments} setId={setId} setSymbol={setSymbol} />
                 <InnerReactsModal id={id} symbol={symbol} setId={setId} setSymbol={setSymbol} />
-                <CommentForm postId={post._id} handleAddedComment = {handleNewComment}/>
+                <CommentForm id={id} postId={post._id} handleAddedComment = {handleNewComment}/>
             </PostModal>
+
+            {/* <PostModal isVisible={isModalVisible} onClose={closeModal} id={post._id}>
+                <InnerSinglePost post={{ ...post, likes, liked: isLiked }} setIsLiked={setIsLiked} setLikes={setLikes} setId={setId} setSymbol={setSymbol} />
+                <CommentsList setComments={setComments} comments={comments} setId={setId} setSymbol={setSymbol} />
+                <InnerReactsModal id={id} symbol={symbol} setId={setId} setSymbol={setSymbol} />
+                <CommentForm postId={post._id} handleAddedComment={handleNewComment} />
+            </PostModal> */}
 
             <ReactsModal isVisible={isReactsModalVisible} onClose={closeReactsModal}>
                 <ReactedUsers reacts={reacts} />

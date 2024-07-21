@@ -3,38 +3,74 @@ import Owner from "./Owner";
 import DropdownButton from "./DropdownButton";
 import { AuthContext } from "./AuthProvider";
 import './FriendList.css'
+import { useLocation } from 'react-router-dom';
+
+const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+};
 
 export default function FriendList({ option }) {
     const [users, setUsers] = useState(null)
     const { AuthToken } = useContext(AuthContext)
+    const [loading, setLoading] = useState(false); // Loading state
 
+    const query = useQuery();
+    const searchQuery = query.get('q');
 
 
     useEffect(() => {
+        setLoading(true);
         const fetchFriends = async () => {
-            let response = option === 'friends' ? await fetch('http://127.0.0.1:5000/friends', {
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${AuthToken}`
-                }
-            }) :
-                await fetch('http://127.0.0.1:5000/friends/received', { 
+            let response
+            if (option === 'friends') {
+               response = await fetch('http://127.0.0.1:5000/friends', {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${AuthToken}`
                     }
                 })
+            }
+            else if (option === 'users') {
+                console.log('a7a')
+                response = await fetch(`http://127.0.0.1:5000/users/search/?q=${searchQuery}`, {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${AuthToken}`
+                    }
+                })
+            }
+
+            else {
+               response = await fetch('http://127.0.0.1:5000/friends/received', {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${AuthToken}`
+                    }
+                })
+            }
+            
             response = await response.json()
-            setUsers(response)
             console.log(response)
+            setUsers(response)
+            setLoading(false)
         }
         fetchFriends()
-    }, [])
-    if (!users) {
-        console.log(users)
-        return null
-    }
-    return (
+    }, [option, searchQuery])
+
+    // if (!users) {
+    //     console.log(users)
+    //     return null
+    // }
+    if (loading) return <div className="spinner">Loading...</div> // Show loading spinner
+
+    else if (!users || users.length === 0) return <div class="centered-container">
+        <div class="centered-message">
+            No {option === 'friends' ? 'friends' :
+                option === 'users' ? 'search results' : 'received requests'} Found
+        </div>
+    </div>
+
+    else return (
         <>
             {
                 users.map(user => (
@@ -87,6 +123,12 @@ function SingleUserRecord({ user, option }) {
                             <button className="reject-button" onClick={handleRejectFriend}>Reject</button>
                         </div>
                 )}
+
+                {/* {option === 'users' && (
+                    theUser.friend ? <button>Friend</button>
+                        : <button>Add Friend</button>
+                )} */}
+
             </div>
         </div>
     )

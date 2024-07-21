@@ -75,3 +75,31 @@
     color: #007BFF;
     /* Optional: Change color on hover */
 }
+
+.navbar-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-search input {
+    padding: 10px 20px 10px 40px;
+    /* Add padding to the left for the icon */
+    font-size: 1em;
+    border: none;
+    border-radius: 20px;
+    background-color: #444;
+    color: #fff;
+    outline: none;
+}
+
+.navbar-search .search-icon {
+    position: absolute;
+    left: 10px;
+    color: #aaa;
+    font-size: 1em;
+}
+
+.navbar-search input::placeholder {
+    color: #ccc;
+}

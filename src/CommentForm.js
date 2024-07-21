@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
 import './CommentForm.css'
 import { AuthContext } from './AuthProvider';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
-const CommentForm = ({ postId, handleAddedComment }) => {
+const CommentForm = ({ postId, handleAddedComment,id }) => {
     const [description, setDescription] = useState('');
     const [file, setFile] = useState(null);
-    const { AuthToken,currentUser } = useContext(AuthContext)
+    const { AuthToken, currentUser } = useContext(AuthContext)
 
     const handleDescriptionChange = (e) => {
         if (e.target.value.length > 200) return
@@ -56,7 +58,9 @@ const CommentForm = ({ postId, handleAddedComment }) => {
         }
     };
 
-    return (
+    if(id) return null
+
+    else return (
         <form className="comment-form" onSubmit={handleSubmit}>
             <div className="form-group">
                 <textarea
@@ -65,11 +69,15 @@ const CommentForm = ({ postId, handleAddedComment }) => {
                     onChange={handleDescriptionChange}
                 />
             </div>
-            <div className="form-group">
-                <input type="file" accept="image/*,video/*" onChange={handleFileChange} />
+            <div className="form-actions">
+                <input type="file" accept="image/*,video/*" onChange={handleFileChange} className="file-input" />
+                <button disabled={!file && !description} type="submit" className="submit-button ">
+                    <FontAwesomeIcon icon={faPaperPlane} className="submit-icon" /> Comment
+                </button>
             </div>
-            <button type="submit" className="submit-button">Comment</button>
         </form>
+
+
     );
 };
 

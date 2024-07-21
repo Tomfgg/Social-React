@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
-import './CommentForm.css'
 import { AuthContext } from './AuthProvider';
-import './CommentForm.css'
+import './ReplyForm.css'    
 
 const ReplyForm = ({ commentId, handleAddedReply, user, setIsReplyFormVisible }) => {
     const [description, setDescription] = useState(user.name+' ');
@@ -61,18 +60,18 @@ const ReplyForm = ({ commentId, handleAddedReply, user, setIsReplyFormVisible })
     };
 
     return (
-        <form className="comment-form" onSubmit={handleSubmit}>
+        <form className="reply-form" onSubmit={handleSubmit}>
             <div className="form-group">
                 <textarea
-                    placeholder="Write a comment..."
+                    placeholder="Write a reply..."
                     value={description}
                     onChange={handleDescriptionChange}
                 />
             </div>
-            <div className="form-group">
+            <div className="form-group flex">
                 <input type="file" accept="image/*" onChange={handleFileChange} />
+                <button type="submit" className="submit-button">Reply</button>
             </div>
-            <button type="submit" className="submit-button">Comment</button>
         </form>
     );
 };

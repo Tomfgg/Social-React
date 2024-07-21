@@ -1,6 +1,7 @@
 import Owner from "./Owner"
 import LikeButton from "./LikeButton"
 import SingleComment from "./SingleComment"
+import './CommentsList.css'
 export default function CommentsList({ comments, setId, setSymbol,setComments }) {
     // console.log(comments)
 
@@ -10,7 +11,7 @@ export default function CommentsList({ comments, setId, setSymbol,setComments })
     }
     
     return (
-        <ul>
+        <ul className="scrollable-container">
             {comments.map(comment => (
                 <div key={comment._id}>
                     {/* <Owner user={comment.user_id}/>

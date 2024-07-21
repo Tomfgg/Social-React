@@ -93,7 +93,7 @@ export default function InnerSinglePost({ post, setLikes, setIsLiked, setId ,set
 
             <div className="actions-container">
                 <LikeButton isLiked={post.liked} setIsLiked={setIsLiked} id={post._id} setLikes={setLikes} likes={post.likes} symbol={'Post'} />
-                <button className="comments-button">Comment</button>
+                <div className="comments-button">Comment</div>
             </div>
 
             

@@ -1,3 +1,6 @@
+.scrollable-container {
+    padding-bottom: 150px;
+}
 /* Comment container */
 .comment-container {
     border: 1px solid #e0e0e0;
@@ -11,8 +14,8 @@
     color: #333;
 }
 
-/* Post header */
-.post-header {
+/* Comment header */
+.comment-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,73 +24,58 @@
 
 /* Comment description */
 .comment-description {
-    font-size: 16px;
+    margin: 0;
     color: #333;
-    max-width: 100%;
-    word-wrap: break-word;
-    /* Breaks long words onto the next line */
-    word-break: break-all;
-    /* Ensures any long words break at any character to fit the line */
-    overflow-wrap: break-word;
-    /* Ensures any long text breaks properly */
-    margin-bottom: 12px;
+    display: inline;
 }
 
 /* Comment image */
-.comment-image1 {
-    width: 50%;
+.comment-image {
+    width: 100%;
     height: auto;
-    border-radius: 15px;
+    border-radius: 4px;
     margin-bottom: 12px;
 }
 
-/* Actions container */
-.actions-container {
+/* Comment actions */
+.comment-actions {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Center the buttons */
     margin-top: 12px;
     gap: 40px;
-    /* Space between buttons */
 }
 
-/* Likes and comments container */
-.likes-comments-container {
+/* Comment likes and comments */
+.comment-likes-comments {
     display: flex;
     justify-content: space-between;
     margin-top: 8px;
 }
 
 /* Likes container */
-.likes-container {
+.comment-likes-container {
     display: flex;
     align-items: center;
     color: #333;
 }
 
 /* Likes count */
-.likes-count {
+.comment-likes-count {
     margin: 0;
     font-size: 14px;
     color: #333;
 }
 
 /* Like icon */
-.like-icon {
+.comment-like-icon {
     color: #1877f2;
     margin-left: 4px;
     cursor: pointer;
 }
 
-/* Comments count */
-.comments-count {
-    font-size: 14px;
-    color: #333;
-}
-
-/* Like button */
-.like-button {
+/* Reply button */
+.comment-reply-button {
     background: none;
     border: none;
     color: #1877f2;
@@ -95,22 +83,4 @@
     display: flex;
     align-items: center;
     font-size: 16px;
-}
-
-/* Reply button */
-.comments-button {
-    background: none;
-    border: none;
-    color: #1877f2;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-/* Show replies */
-.show-replies {
-    color: #1877f2;
-    cursor: pointer;
-    margin-top: 8px;
-    text-align: center;
-    /* Center the text */
 }

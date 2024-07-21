@@ -5,11 +5,12 @@ import ReactedUsers from "./ReactedUsers"
 import LikeButton from "./LikeButton"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import './CommentComponent.css';
+// import './CommentComponent.css';
 import DropdownButton from "./DropdownButton"
 import { Link } from "react-router-dom"
 import CommentFormEdit from "./CommentFormEdit"
-import './SinglePost.css'
+// import './SinglePost.css'
+import './ReplyComponent.css'
 
 export default function SingleReply({ replySent, setId, setSymbol, setIsReplyFormVisible, setUser, repliesSetter }) {
     // console.log(reply)
@@ -68,39 +69,46 @@ export default function SingleReply({ replySent, setId, setSymbol, setIsReplyFor
     )
 
     else return (
-        <div className="comment-container">
-            <div className="post-header">
+        <div className="reply-container">
+            <div className="reply-header">
                 <Owner theUser={reply.user_id} date={reply.createdAt} settings={'reply'} />
-                {(currentUser._id === reply.user_id?._id || !reply.user_id) && <DropdownButton setEditable={setEditable} handleDelete={handleDeleteReply} settings={'reply'} />}
+                {(currentUser._id === reply.user_id?._id || !reply.user_id) && (
+                    <DropdownButton setEditable={setEditable} handleDelete={handleDeleteReply} settings={'reply'} />
+                )}
             </div>
 
-            <div>
-                {reply.toWhoName && <Link to={`/user/${reply.toWhoID}`}>{reply.toWhoName}</Link>}
-                <p className="comment-description">{reply.describtion}</p>
+            <div className="reply-content">
+                {reply.toWhoName && (
+                    <Link to={`/user/${reply.toWhoID}`} className="reply-link">
+                        {reply.toWhoName}
+                    </Link>
+                )}
+                <p className="reply-description">{reply.describtion}</p>
             </div>
 
-            {reply.file && <img src={reply.file} alt="Comment" className="comment-image" />}
+            {reply.file && <img src={reply.file} alt="Reply" className="reply-image" />}
 
-            <div className="actions-container">
-                <LikeButton isLiked={isLiked} setIsLiked={setIsLiked} id={reply._id} setLikes={setLikes} likes={likes} symbol={'Reply'} />
-                <button onClick={handleReplyFormVisibility} className="comments-button">Reply</button>
+            <div className="reply-actions">
+                <LikeButton
+                    isLiked={isLiked}
+                    setIsLiked={setIsLiked}
+                    id={reply._id}
+                    setLikes={setLikes}
+                    likes={likes}
+                    symbol={'Reply'}
+                />
+                <div onClick={handleReplyFormVisibility} className="reply-button">Reply</div>
             </div>
 
-            <div className="likes-comments-container">
+            <div className="reply-likes-comments">
                 {likes > 0 && (
-                    <div
-                        onClick={setData}
-                        className="likes-container"
-                    >
-                        <p className="likes-count">{likes}</p>
-                        <FontAwesomeIcon
-                            icon={faThumbsUp}
-                            className="like-icon"
-                        />
+                    <div onClick={setData} className="reply-likes-container">
+                        <p className="reply-likes-count">{likes}</p>
+                        <FontAwesomeIcon icon={faThumbsUp} className="reply-like-icon" />
                     </div>
                 )}
             </div>
-            {/* {reacts && <ReactedUsers reacts={reacts} />} */}
         </div>
+
     );
 }

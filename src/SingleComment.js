@@ -11,7 +11,7 @@ import DropdownButton from "./DropdownButton"
 import CommentForm from "./CommentForm"
 import ReplyForm from "./ReplyForm"
 import CommentFormEdit from "./CommentFormEdit"
-import './SinglePost.css'
+// import './SinglePost.css'
 
 export default function SingleComment({ commentSent, setId, setSymbol, commentsSetter }) {
     const { AuthToken, currentUser } = useContext(AuthContext)
@@ -24,7 +24,7 @@ export default function SingleComment({ commentSent, setId, setSymbol, commentsS
     const [isReplyFormVisible, setIsReplyFormVisible] = useState(false)
     const [user, setUser] = useState(null)
     const [editable, setEditable] = useState(false)
-    
+
 
     console.log(comment.user_id.image)
     console.log(isLiked)
@@ -81,44 +81,57 @@ export default function SingleComment({ commentSent, setId, setSymbol, commentsS
 
     else return (
         <div className="comment-container">
-            <div className="post-header">
+            <div className="comment-header">
                 <Owner theUser={comment.user_id} date={comment.createdAt} settings={'comment'} />
-                {(currentUser._id === comment.user_id?._id || !comment.user_id) && <DropdownButton setEditable={setEditable} handleDelete={handleDeleteComment}
-                    settings={'comment'} />}
+                {(currentUser._id === comment.user_id?._id || !comment.user_id) && (
+                    <DropdownButton setEditable={setEditable} handleDelete={handleDeleteComment} settings={'comment'} />
+                )}
             </div>
 
-            <p className="comment-description">{comment.describtion}</p>
-            {comment.file && <img src={comment.file} alt="Comment" className="comment-image" />}
+                <div className="comment-description">{comment.describtion}</div>
+                <br />
+                {comment.file && <img src={comment.file} alt="Comment" className="comment-image1" />}
 
-            <div className="actions-container">
+            <div className="comment-actions">
                 <LikeButton id={comment._id} isLiked={isLiked} setIsLiked={setIsLiked} setLikes={setLikes} likes={likes} symbol={'Comment'} />
-                <button className="comments-button" onClick={handleVisible}>Reply</button>
+                <div className="comment-reply-button" onClick={handleVisible}>Reply</div>
             </div>
 
-            <div className="likes-comments-container">
+            <div className="comment-likes-comments">
                 {likes > 0 && (
-                    <div
-                        onClick={setData}
-                        className="likes-container"
-                    >
-                        <p className="likes-count">{likes}</p>
-                        <FontAwesomeIcon
-                            icon={faThumbsUp}
-                            className="like-icon"
-                        />
+                    <div onClick={setData} className="comment-likes-container">
+                        <p className="comment-likes-count">{likes}</p>
+                        <FontAwesomeIcon icon={faThumbsUp} className="comment-like-icon" />
                     </div>
                 )}
-                {/* {comment.replies > 0 && <div className="comments-count">{comment.replies} replies</div>} */}
+                {/* {comment.replies > 0 && <div className="comment-comments-count">{comment.replies} replies</div>} */}
             </div>
             <div onClick={showReplies}>show replies</div>
 
-            {replies.length > 0 && <RepliesList setReplies={setReplies} setIsReplyFormVisible={setIsReplyFormVisible} setUser={setUser}
-                replies={replies} setId={setId} setSymbol={setSymbol} />}
+            {replies.length > 0 && (
+                <RepliesList
+                    setReplies={setReplies}
+                    setIsReplyFormVisible={setIsReplyFormVisible}
+                    setUser={setUser}
+                    replies={replies}
+                    setId={setId}
+                    setSymbol={setSymbol}
+                />
+            )}
 
-            {isReplyFormVisible && <ReplyForm commentId={comment._id}
-                user={user}
-                setIsReplyFormVisible={setIsReplyFormVisible} handleAddedReply={handleAddedReply} />}
+            {isReplyFormVisible && (
+                <ReplyForm
+                    commentId={comment._id}
+                    user={user}
+                    setIsReplyFormVisible={setIsReplyFormVisible}
+                    handleAddedReply={handleAddedReply}
+                />
+            )}
             {/* {reacts && <ReactedUsers reacts={reacts} />} */}
         </div>
+
+
+
+
     );
 }

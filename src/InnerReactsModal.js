@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import ReactedUsers from "./ReactedUsers"
+import './InnerReactsModal.css'
 
 export default function InnerReactsModal({ id, symbol,setId,setSymbol }) {
     const [reacts, setReacts] = useState(null)
@@ -28,9 +29,9 @@ export default function InnerReactsModal({ id, symbol,setId,setSymbol }) {
 
     else {
         return (
-            <div className="modal-overlay" onClick={onClose}>
-                <div className="modal-content" onClick={e => e.stopPropagation()}>
-                    <button className="close-button" onClick={onClose}>X</button>
+            <div className="modal-overlay1" onClick={onClose}>
+                <div className="modal-content1" onClick={e => e.stopPropagation()}>  
+                    <button className="close-button1" onClick={onClose}>X</button>
                     <ReactedUsers reacts={reacts} />
                 </div>
             </div>

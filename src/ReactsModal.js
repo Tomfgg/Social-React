@@ -1,6 +1,6 @@
 // Modal.js
 import React, { useEffect } from 'react';
-// import './PostModal.css';
+import './InnerReactsModal.css';
 
 function ReactsModal({ isVisible, onClose, children }) {
     useEffect(() => {
@@ -18,9 +18,9 @@ function ReactsModal({ isVisible, onClose, children }) {
     if (!isVisible) return null;
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
-                <button className="close-button" onClick={onClose}>X</button>
+        <div className="modal-overlay1" onClick={onClose}>
+            <div className="modal-content1" onClick={e => e.stopPropagation()}>
+                <button className="close-button1" onClick={onClose}>X</button>
                 {children}
             </div>
         </div>

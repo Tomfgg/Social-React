@@ -21,11 +21,11 @@ export default function LikeButton({ isLiked, setIsLiked, id, setLikes, likes, s
 
     return (
         <div>
-            {symbol === 'Post' ? <FontAwesomeIcon
+            {symbol === 'Post' ? <FontAwesomeIcon 
                 icon={faThumbsUp}
                 onClick={toggleLike}
-                style={{ color: isLiked ? 'blue' : 'gray', cursor: 'pointer' }}
-            /> : <div style={{ color: isLiked ? 'blue' : 'black', cursor: 'pointer' }} onClick={toggleLike}>Like</div>}
+                style={{ color: isLiked ? '#1877f2': 'gray', cursor: 'pointer' }}
+            /> : <div style={{ color: isLiked ? '#1877f2' : 'black', cursor: 'pointer' }} onClick={toggleLike}>Like</div>}
         </div>
     )
 }
