@@ -1,11 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from './AuthProvider';
 import './ReplyForm.css'    
+// import CloseButton from 'react-bootstrap/CloseButton';
+import { CommentsCountContext } from './SinglePost'
 
 const ReplyForm = ({ commentId, handleAddedReply, user, setIsReplyFormVisible }) => {
+    const {incrementComments} = useContext(CommentsCountContext)
     const [description, setDescription] = useState(user.name+' ');
     const [file, setFile] = useState(null);
     const { AuthToken, currentUser } = useContext(AuthContext)
+    console.log(user)
 
     const handleDescriptionChange = (e) => {
         if (!e.target.value.startsWith(user.name)) return
@@ -53,6 +57,7 @@ const ReplyForm = ({ commentId, handleAddedReply, user, setIsReplyFormVisible })
             setFile(null);
             handleAddedReply(addedReply)
             setIsReplyFormVisible(false)
+            incrementComments()
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
             // Handle error (e.g., show an error message)
@@ -68,10 +73,12 @@ const ReplyForm = ({ commentId, handleAddedReply, user, setIsReplyFormVisible })
                     onChange={handleDescriptionChange}
                 />
             </div>
+            
             <div className="form-group flex">
                 <input type="file" accept="image/*" onChange={handleFileChange} />
                 <button type="submit" className="submit-button">Reply</button>
             </div>
+            {/* <CloseButton /> */}
         </form>
     );
 };

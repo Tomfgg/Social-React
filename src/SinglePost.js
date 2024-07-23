@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import LikeButton from "./LikeButton"
 import ReactedUsers from "./ReactedUsers"
 import CommentsList from "./CommentsList"
@@ -12,8 +12,10 @@ import InnerSinglePost from "./InnerSinglePost"
 import ReactsModal from "./ReactsModal"
 import InnerReactsModal from "./InnerReactsModal"
 import DropdownButton from "./DropdownButton"
-import CommentForm from "./CommentForm" 
+import CommentForm from "./CommentForm"
 import './SinglePost.css'
+
+export const CommentsCountContext = createContext(null)
 
 export default function SinglePost({ post, postsSetter }) {
     const { AuthToken, currentUser } = useContext(AuthContext)
@@ -23,17 +25,27 @@ export default function SinglePost({ post, postsSetter }) {
     const [comments, setComments] = useState([])
     const [id, setId] = useState(null)
     const [symbol, setSymbol] = useState(null)
+    const [commentsCount, setCommentsCount] = useState(post.comments)
     // const [skip, setSkip] = useState(0)
     // const [toFetch,setToFetch] = useState(false)
     // console.log(post.user_id.image)
     console.log(post)
     console.log(comments)
 
+    const incrementComments = () => {
+        setCommentsCount(commentsCount + 1)
+    }
+
+    const decrementComments = (newCount) => {
+        if (newCount) setCommentsCount(newCount)
+        else setCommentsCount(commentsCount - 1)
+    }
+
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isReactsModalVisible, setIsReactsModalVisible] = useState(false);
 
     const handleNewComment = (addedComment) => {
-        setComments([addedComment,...comments])
+        setComments([addedComment, ...comments])
     }
 
     const openModal = async () => {
@@ -113,12 +125,12 @@ export default function SinglePost({ post, postsSetter }) {
     //     }
 
     // }, [post._id])
-    if(!post) return null
+    if (!post) return null
 
     return (
         <div className="post-container">
             <div className="post-header">
-                <Owner theUser={post.user_id ? post.user_id:null} date={post.createdAt}/>
+                <Owner theUser={post.user_id ? post.user_id : null} date={post.createdAt} />
                 {/* {post.createdAt && <div>{formatRelativeDate(post.createdAt)}</div>} */}
                 {(currentUser._id === post.user_id?._id || !post.user_id) &&
                     <DropdownButton settings={'post'} id={post._id} handleDelete={handleDeletePost} />}
@@ -127,35 +139,37 @@ export default function SinglePost({ post, postsSetter }) {
             {post.images.length > 0 && <img src={post.images[0]} alt="Post" className="post-image" />}
 
             <div className="likes-comments-container">
-                {likes > 0 && (
-                    <div
-                        onClick={openReactsModal}
-                        className="likes-container"
-                    >
-                        <p className="likes-count">{likes}</p>
-                        <FontAwesomeIcon
-                            icon={faThumbsUp}
-                            className="like-icon"
-                        />
-                    </div>
-                )}
-                {post.comments > 0 && <div className="comments-count">{post.comments} comments</div>}
+
+                <div
+                    onClick={openReactsModal}
+                    className="likes-container"
+                >
+                    <p className="likes-count">{likes}</p>
+                    {likes > 0 && <FontAwesomeIcon
+                        icon={faThumbsUp}
+                        className="like-icon"
+                    />}
+                </div>
+
+                {commentsCount > 0 && <div className="comments-count">{commentsCount} comments</div>}
             </div>
 
             {/* {reacts && <ReactedUsers reacts={reacts} />} */}
 
-            <div className="actions-container"> 
+            <div className="actions-container">
                 <LikeButton isLiked={isLiked} setIsLiked={setIsLiked} id={post._id} setLikes={setLikes} likes={likes} symbol={'Post'} />
-                <div onClick={openModal} className="comments-button">Comment</div>  
+                <div onClick={openModal} className="comments-button">Comment</div>
             </div>
             {/* <CommentsList comments={comments} /> */}
 
-            <PostModal isVisible={isModalVisible} onClose={closeModal} id={post._id}>
-                <InnerSinglePost post={{ ...post, likes, liked: isLiked }} setIsLiked={setIsLiked} setLikes={setLikes} setId={setId} setSymbol={setSymbol} />
-                <CommentsList setComments={setComments} comments={comments} setId={setId} setSymbol={setSymbol} />
-                <InnerReactsModal id={id} symbol={symbol} setId={setId} setSymbol={setSymbol} />
-                <CommentForm id={id} postId={post._id} handleAddedComment = {handleNewComment}/>
-            </PostModal>
+            <CommentsCountContext.Provider value={{ incrementComments, decrementComments }}>
+                <PostModal isVisible={isModalVisible} onClose={closeModal} id={post._id}>
+                    <InnerSinglePost commentsCount={commentsCount} post={{ ...post, likes, liked: isLiked }} setIsLiked={setIsLiked} setLikes={setLikes} setId={setId} setSymbol={setSymbol} />
+                    <CommentsList setComments={setComments} comments={comments} setId={setId} setSymbol={setSymbol} />
+                    <InnerReactsModal id={id} symbol={symbol} setId={setId} setSymbol={setSymbol} />
+                    <CommentForm id={id} postId={post._id} handleAddedComment={handleNewComment} />
+                </PostModal>
+            </CommentsCountContext.Provider>
 
             {/* <PostModal isVisible={isModalVisible} onClose={closeModal} id={post._id}>
                 <InnerSinglePost post={{ ...post, likes, liked: isLiked }} setIsLiked={setIsLiked} setLikes={setLikes} setId={setId} setSymbol={setSymbol} />

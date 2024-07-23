@@ -11,8 +11,10 @@ import { Link } from "react-router-dom"
 import CommentFormEdit from "./CommentFormEdit"
 // import './SinglePost.css'
 import './ReplyComponent.css'
+import { CommentsCountContext } from './SinglePost'
 
 export default function SingleReply({ replySent, setId, setSymbol, setIsReplyFormVisible, setUser, repliesSetter }) {
+    const {decrementComments} = useContext(CommentsCountContext)
     // console.log(reply)
     const { AuthToken, currentUser } = useContext(AuthContext)
     const [reply, setReply] = useState(replySent)
@@ -62,6 +64,7 @@ export default function SingleReply({ replySent, setId, setSymbol, setIsReplyFor
             }
         })
         repliesSetter(reply)
+        decrementComments()
     }
 
     if (editable) return (

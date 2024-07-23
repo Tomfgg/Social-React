@@ -72,6 +72,16 @@ function UserHeader({ id, sentUser }) {
             setUser({...user,relation:'none'})
         }
 
+       const handleCancelRequest = ()=>{
+           fetch(`http://127.0.0.1:5000/friends/withdraw/${id}`, {
+               method: 'POST',
+               headers: {
+                   Authorization: `Bearer ${AuthToken}`
+               }
+           })
+           setUser({ ...user, relation: 'none' })
+       }
+
         const fetchUser = async () => {
             let response = await fetch(`http://127.0.0.1:5000/users/${id}`, {
                 method: 'GET',
@@ -96,7 +106,7 @@ function UserHeader({ id, sentUser }) {
             <div className="user-info">
                 <div className="user-name">{user ? user.name : 'Loading...'}</div>
                     {user && user.relation === 'friend' && <button className="friend">Friend</button>}
-                    {user && user.relation === 'isent' && <button className="cancel-request">Cancel Request</button>}
+                    {user && user.relation === 'isent' && <button onClick={handleCancelRequest} className="cancel-request">Cancel Request</button>}
                     {user && user.relation === 'ireceived' && (
                         <div>
                             <button onClick={handleAcceptFriend} className="accept">Accept friend request</button>

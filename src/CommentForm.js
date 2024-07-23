@@ -3,8 +3,10 @@ import './CommentForm.css'
 import { AuthContext } from './AuthProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-
-const CommentForm = ({ postId, handleAddedComment,id }) => {
+import { CommentsCountContext } from './SinglePost'
+ 
+const CommentForm = ({ postId, handleAddedComment,id}) => {
+    const { incrementComments } = useContext(CommentsCountContext)
     const [description, setDescription] = useState('');
     const [file, setFile] = useState(null);
     const { AuthToken, currentUser } = useContext(AuthContext)
@@ -52,6 +54,7 @@ const CommentForm = ({ postId, handleAddedComment,id }) => {
             setDescription('');
             setFile(null);
             handleAddedComment(addedComment)
+            incrementComments()
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
             // Handle error (e.g., show an error message)

@@ -19,7 +19,7 @@ export default function CommentsList({ comments, setId, setSymbol,setComments })
                     <img src={comment.file} alt="Post" /> */}
                     {/* <LikeButton liked={comment.liked} id={comment._id} setLikes={setLikes} likes={likes}  /> */}
                     {/* <LikeButton liked={post.liked} id={post._id} setLikes={setLikes} likes={likes} /> */}
-                    <SingleComment commentsSetter={commentsSetter} commentSent={comment} setId={setId} setSymbol={setSymbol} />
+                    <SingleComment  commentsSetter={commentsSetter} commentSent={comment} setId={setId} setSymbol={setSymbol} />
                 </div>
             ))}
         </ul>

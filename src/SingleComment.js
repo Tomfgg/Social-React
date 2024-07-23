@@ -11,9 +11,11 @@ import DropdownButton from "./DropdownButton"
 import CommentForm from "./CommentForm"
 import ReplyForm from "./ReplyForm"
 import CommentFormEdit from "./CommentFormEdit"
+import { CommentsCountContext } from './SinglePost'
 // import './SinglePost.css'
 
 export default function SingleComment({ commentSent, setId, setSymbol, commentsSetter }) {
+    const {decrementComments} = useContext(CommentsCountContext)
     const { AuthToken, currentUser } = useContext(AuthContext)
     const [comment, setComment] = useState(commentSent)
     console.log(comment)
@@ -65,14 +67,16 @@ export default function SingleComment({ commentSent, setId, setSymbol, commentsS
         setUser({ id: comment.user_id._id, name: comment.user_id.name })
     }
 
-    const handleDeleteComment = () => {
-        fetch(`http://127.0.0.1:5000/comments/${comment._id}`, {
+    const handleDeleteComment = async() => {
+        let response = await fetch(`http://127.0.0.1:5000/comments/${comment._id}`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${AuthToken}`
             }
         })
+        response = await response.json()
         commentsSetter(comment)
+        decrementComments(response.count)
     }
 
     if (editable) return (
@@ -88,9 +92,9 @@ export default function SingleComment({ commentSent, setId, setSymbol, commentsS
                 )}
             </div>
 
-                <div className="comment-description">{comment.describtion}</div>
-                <br />
-                {comment.file && <img src={comment.file} alt="Comment" className="comment-image1" />}
+            <div className="comment-description">{comment.describtion}</div>
+            <br />
+            {comment.file && <img src={comment.file} alt="Comment" className="comment-image1" />}
 
             <div className="comment-actions">
                 <LikeButton id={comment._id} isLiked={isLiked} setIsLiked={setIsLiked} setLikes={setLikes} likes={likes} symbol={'Comment'} />
@@ -106,7 +110,7 @@ export default function SingleComment({ commentSent, setId, setSymbol, commentsS
                 )}
                 {/* {comment.replies > 0 && <div className="comment-comments-count">{comment.replies} replies</div>} */}
             </div>
-            <div onClick={showReplies}>show replies</div>
+            <div style={{ cursor: "pointer", marginTop: "10px", color: "#1877f2" }} onClick={showReplies}>show replies</div>
 
             {replies.length > 0 && (
                 <RepliesList
@@ -121,6 +125,7 @@ export default function SingleComment({ commentSent, setId, setSymbol, commentsS
 
             {isReplyFormVisible && (
                 <ReplyForm
+                    key={user.id}
                     commentId={comment._id}
                     user={user}
                     setIsReplyFormVisible={setIsReplyFormVisible}

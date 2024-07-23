@@ -11,7 +11,7 @@ import PostModal from "./PostModal"
 import DropdownButton from "./DropdownButton"
 
 
-export default function InnerSinglePost({ post, setLikes, setIsLiked, setId ,setSymbol}) {
+export default function InnerSinglePost({ post, setLikes, setIsLiked, setId, setSymbol, commentsCount }) {
     const { currentUser } = useContext(AuthContext)
     // const [likes, setLikes] = useState(post.likes)
     // const [isLiked, setIsLiked] = useState(post.liked)
@@ -76,19 +76,19 @@ export default function InnerSinglePost({ post, setLikes, setIsLiked, setId ,set
             {post.images.length > 0 &&<img src={post.images[0]} alt="Post" className="post-image" />}
 
             <div className="likes-comments-container">
-                {post.likes > 0 && (
+                 
                     <div
                         onClick={setForPostReacts}
                         className="likes-container"
                     >
                         <p className="likes-count">{post.likes}</p>
-                        <FontAwesomeIcon
+                        {post.likes > 0 &&<FontAwesomeIcon
                             icon={faThumbsUp}
                             className="like-icon"
-                        />
+                        />}
                     </div>
-                )}
-                {post.comments > 0 && <div className="comments-count">{post.comments} comments</div>}
+                
+                {commentsCount > 0 && <div className="comments-count">{commentsCount} comments</div>}
             </div>
 
             <div className="actions-container">

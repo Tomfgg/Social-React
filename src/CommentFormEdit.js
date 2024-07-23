@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import { AuthContext } from "./AuthProvider";
+import './CommentFormEdit.css'
 
 const CommentFormEdit = ({ comment, setEditable, setComment, type }) => {
     const [describtion, setDescribtion] = useState(comment.describtion)
@@ -46,9 +47,11 @@ const CommentFormEdit = ({ comment, setEditable, setComment, type }) => {
             body: formData,
         });
         newComment = await newComment.json()
+        // if (newComment.file) newComment.file = 'http://127.0.0.1:5000/commentfile/' + newComment.file
         newComment.user_id = {
             _id: currentUser._id,
-            name: currentUser.name
+            name: currentUser.name,
+            image: currentUser.image.replace('http://127.0.0.1:5000/profileImage/', '')
         }
         console.log(newComment)
         setEditable(false)
@@ -56,29 +59,38 @@ const CommentFormEdit = ({ comment, setEditable, setComment, type }) => {
     }
 
     return (
-        <form className="comment-form" onSubmit={handleSubmit}>
-            <div className="form-group">
+        <form className="comment-edit-form" onSubmit={handleSubmit}>
+            <div className="comment-edit-form-group">
                 <textarea
                     placeholder="Write a comment..."
                     value={describtion}
                     onChange={handleDescribtionChange}
+                    className="comment-edit-textarea"
                 />
             </div>
 
-            {oldFile ? <div>
-                <img src={oldFile} width="100" />
-                <button type="button" onClick={() => handleRemoveOldFile()}>Remove</button>
-            </div> : newFile ? <div>
-                <img src={URL.createObjectURL(newFile)} width="50" />
-                <button type="button" onClick={() => handleRemoveNewFile()}>Remove</button>
-            </div> :
-                <div className="form-group">
-                    <input type="file" accept="image/*,video/*" onChange={handleFileChange} />
-                </div>}
+            {oldFile ? (
+                <div className="comment-edit-file-preview">
+                    <img src={oldFile} alt="Old File" className="comment-edit-preview-image" />
+                    <button type="button" onClick={handleRemoveOldFile} className="comment-edit-remove-button">Remove</button>
+                </div>
+            ) : newFile ? (
+                <div className="comment-edit-file-preview">
+                    <img src={URL.createObjectURL(newFile)} alt="New File" className="comment-edit-preview-image" />
+                    <button type="button" onClick={handleRemoveNewFile} className="comment-edit-remove-button">Remove</button>
+                </div>
+            ) : (
+                <div className="comment-edit-form-group">
+                    <input type="file" accept="image/*,video/*" onChange={handleFileChange} className="comment-edit-file-input" />
+                </div>
+            )}
 
-            <button type="submit" onClick={handleSubmit} className="submit-button">edit</button>
-            <button type="submit" onClick={() => setEditable(false)} className="submit-button">cancel</button>
+            <div className="comment-edit-button-group">
+                <button type="submit" onClick={handleSubmit} className="comment-edit-submit-button">Edit</button>
+                <button type="button" onClick={() => setEditable(false)} className="comment-edit-cancel-button">Cancel</button>
+            </div>
         </form>
+
     );
 }
 

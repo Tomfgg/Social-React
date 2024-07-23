@@ -30,7 +30,7 @@
     /* Ensures any long words break at any character to fit the line */
     overflow-wrap: break-word;
     /* Ensures any long text breaks properly */
-    margin-bottom: 12px;
+    margin-bottom: 12px;        
 }
 
 /* Comment image */
