@@ -1,5 +1,5 @@
 import { AuthContext } from "./AuthProvider"
-import { useState, useContext } from "react"
+import { useState, useContext, createContext } from "react"
 import Owner from "./Owner"
 import ReactedUsers from "./ReactedUsers"
 import LikeButton from "./LikeButton"
@@ -12,9 +12,10 @@ import CommentForm from "./CommentForm"
 import ReplyForm from "./ReplyForm"
 import CommentFormEdit from "./CommentFormEdit"
 import { CommentsCountContext } from './SinglePost'
+
 // import './SinglePost.css'
 
-export default function SingleComment({ commentSent, setId, setSymbol, commentsSetter }) {
+export default function SingleComment({ skip,setSkip,commentSent, setId, setSymbol, commentsSetter }) {
     const {decrementComments} = useContext(CommentsCountContext)
     const { AuthToken, currentUser } = useContext(AuthContext)
     const [comment, setComment] = useState(commentSent)
@@ -26,6 +27,8 @@ export default function SingleComment({ commentSent, setId, setSymbol, commentsS
     const [isReplyFormVisible, setIsReplyFormVisible] = useState(false)
     const [user, setUser] = useState(null)
     const [editable, setEditable] = useState(false)
+    const msg = comment.replies ? `Show All Replies (${comment.replies})`:null
+    const [showRepliesButton, setShowRepliesButton] = useState(msg)
 
 
     console.log(comment.user_id.image)
@@ -38,6 +41,7 @@ export default function SingleComment({ commentSent, setId, setSymbol, commentsS
 
     const handleAddedReply = (addedReply) => {
         setReplies([...replies, addedReply])
+       if(showRepliesButton) setShowRepliesButton('Show Previous Replies')
     }
 
     const hideReacts = () => {
@@ -59,6 +63,7 @@ export default function SingleComment({ commentSent, setId, setSymbol, commentsS
         newReplies = await newReplies.json()
         console.log([...newReplies])
         setReplies([...newReplies])
+        setShowRepliesButton(null)
         // setSkip(skip + 3)
     }
 
@@ -77,6 +82,7 @@ export default function SingleComment({ commentSent, setId, setSymbol, commentsS
         response = await response.json()
         commentsSetter(comment)
         decrementComments(response.count)
+        setSkip(skip-1)
     }
 
     if (editable) return (
@@ -110,7 +116,7 @@ export default function SingleComment({ commentSent, setId, setSymbol, commentsS
                 )}
                 {/* {comment.replies > 0 && <div className="comment-comments-count">{comment.replies} replies</div>} */}
             </div>
-            <div style={{ cursor: "pointer", marginTop: "10px", color: "#1877f2" }} onClick={showReplies}>show replies</div>
+            {showRepliesButton && <div style={{ cursor: "pointer", marginTop: "10px", color: "#1877f2" }} onClick={showReplies}>{showRepliesButton}</div>}
 
             {replies.length > 0 && (
                 <RepliesList
@@ -120,6 +126,9 @@ export default function SingleComment({ commentSent, setId, setSymbol, commentsS
                     replies={replies}
                     setId={setId}
                     setSymbol={setSymbol}
+                    count = {comment.replies}
+                    length = {replies.length}
+                    setShowRepliesButton={setShowRepliesButton}
                 />
             )}
 

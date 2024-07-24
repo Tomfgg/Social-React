@@ -1,0 +1,30 @@
+.show-more {
+    display: block;
+    /* Use block display to center with margin auto */
+    width: 200px;
+    /* Set a fixed width */
+    margin: 20px auto;
+    /* Center the element horizontally with auto margin */
+    padding: 10px 20px;
+    background-color: #007bff;
+    /* Background color */
+    color: white;
+    /* Text color */
+    border-radius: 5px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    font-size: 16px;
+    /* Font size */
+    text-align: center;
+    /* Center text */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Box shadow */
+    transition: background-color 0.3s ease;
+    /* Smooth transition for background color */
+}
+
+.show-more:hover {
+    background-color: #0056b3;
+    /* Darker background on hover */
+}

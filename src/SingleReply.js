@@ -13,7 +13,7 @@ import CommentFormEdit from "./CommentFormEdit"
 import './ReplyComponent.css'
 import { CommentsCountContext } from './SinglePost'
 
-export default function SingleReply({ replySent, setId, setSymbol, setIsReplyFormVisible, setUser, repliesSetter }) {
+export default function SingleReply({ replySent, setId, setSymbol, setIsReplyFormVisible, setUser, repliesSetter, count, length, setShowRepliesButton }) {
     const {decrementComments} = useContext(CommentsCountContext)
     // console.log(reply)
     const { AuthToken, currentUser } = useContext(AuthContext)
@@ -65,6 +65,8 @@ export default function SingleReply({ replySent, setId, setSymbol, setIsReplyFor
         })
         repliesSetter(reply)
         decrementComments()
+        console.log(count,length)
+        if (count && !(length-1)) setShowRepliesButton(`Show All Replies (${count})`)
     }
 
     if (editable) return (

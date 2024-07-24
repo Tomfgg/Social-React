@@ -17,12 +17,15 @@ import './SinglePost.css'
 
 export const CommentsCountContext = createContext(null)
 
-export default function SinglePost({ post, postsSetter }) {
+export default function SinglePost({ post, postsSetter, decrementSkip }) {
     const { AuthToken, currentUser } = useContext(AuthContext)
     const [likes, setLikes] = useState(post.likes)
     const [isLiked, setIsLiked] = useState(post.liked)
     const [reacts, setReacts] = useState(null)
     const [comments, setComments] = useState([])
+    const [skip, setSkip] = useState(0)
+    const [scrollDisabled,setScrollDisabled] = useState(false)
+    const [noMoreComments,setNoMoreComments] = useState(false)
     const [id, setId] = useState(null)
     const [symbol, setSymbol] = useState(null)
     const [commentsCount, setCommentsCount] = useState(post.comments)
@@ -46,23 +49,50 @@ export default function SinglePost({ post, postsSetter }) {
 
     const handleNewComment = (addedComment) => {
         setComments([addedComment, ...comments])
+        setSkip(skip+1)
     }
 
     const openModal = async () => {
-        let newComments = await fetch(`http://127.0.0.1:5000/comments/${post._id}?skip=0`, {
+        let newComments = await fetch(`http://127.0.0.1:5000/comments/${post._id}?skip=${skip}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${AuthToken}`,
             },
         })
-        newComments = await newComments.json()
-        console.log(newComments)
-        setComments([...newComments])
+        if(newComments.ok) {
+            newComments = await newComments.json()
+            if (newComments.length < 5) setNoMoreComments(true)
+            console.log(newComments)
+            setComments([...newComments])
+            if(scrollDisabled) setScrollDisabled(false)
+            setSkip(skip + 5)
+        }
+        else setScrollDisabled(true)
         setIsModalVisible(true);
     };
 
+    const getOtherComments = async () => {
+        if (!scrollDisabled) {
+            let otherComments = await fetch(`http://127.0.0.1:5000/comments/${post._id}?skip=${skip}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${AuthToken}`,
+                },
+            })
+            if (otherComments.ok) {
+                otherComments = await otherComments.json()
+                if (otherComments.length < 5) setNoMoreComments(true)
+                console.log(otherComments)
+                setComments([...comments, ...otherComments])
+                setSkip(skip+5)
+            }
+        }
+    }
+
     const closeModal = () => {
         setIsModalVisible(false);
+        setSkip(0)
+        setNoMoreComments(false)
         // setComments([])
     };
 
@@ -109,6 +139,7 @@ export default function SinglePost({ post, postsSetter }) {
             }
         })
         postsSetter(post)
+        decrementSkip()
     }
 
     // useEffect(()=>{
@@ -165,7 +196,7 @@ export default function SinglePost({ post, postsSetter }) {
             <CommentsCountContext.Provider value={{ incrementComments, decrementComments }}>
                 <PostModal isVisible={isModalVisible} onClose={closeModal} id={post._id}>
                     <InnerSinglePost commentsCount={commentsCount} post={{ ...post, likes, liked: isLiked }} setIsLiked={setIsLiked} setLikes={setLikes} setId={setId} setSymbol={setSymbol} />
-                    <CommentsList setComments={setComments} comments={comments} setId={setId} setSymbol={setSymbol} />
+                    <CommentsList noMoreComments={noMoreComments} getOtherComments={getOtherComments} skip={skip} setSkip={setSkip} setComments={setComments} comments={comments} setId={setId} setSymbol={setSymbol} />
                     <InnerReactsModal id={id} symbol={symbol} setId={setId} setSymbol={setSymbol} />
                     <CommentForm id={id} postId={post._id} handleAddedComment={handleNewComment} />
                 </PostModal>
