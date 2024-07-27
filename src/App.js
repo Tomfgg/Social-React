@@ -12,6 +12,7 @@ import FriendList from "./FriendList";
 import PostForm from "./PostForm";
 import PostFormEdit from "./PostFormEdit";
 import ProfileFormEdit from "./ProfileFormEdit";
+import StyledRoute from './StyledRoute';
 
 function App() {
   const { AuthToken, currentUser } = useContext(AuthContext)
@@ -24,20 +25,20 @@ function App() {
     // <Router>
     <div>
       {!shouldHideNavbar && <Navbar />}
-        <Routes>
-          <Route path="/" element={isAuth ? <PostsList /> : <Navigate to="/Login" />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={isAuth ? <UserProfile sentUser={currentUser} /> : <Navigate to="/Login" />} />
-          <Route path="/user/:id" element={isAuth ? <UserProfileWrapper /> : <Navigate to="/Login" />} />
-          <Route path="/friends" element={isAuth ? <FriendList option={'friends'} /> : <Navigate to="/Login" />} />
-          <Route path="/friendRequests" element={isAuth ? <FriendList option={'received'} /> : <Navigate to="/Login" />} />
-          <Route path="/postForm" element={isAuth ? <PostForm /> : <Navigate to="/Login" />} />
-          <Route path="/postForm/:id/edit" element={isAuth ? <PostFormEditWrapper /> : <Navigate to="/Login" />} />
-          <Route path="/profile/edit" element={isAuth ? <ProfileFormEdit /> : <Navigate to="/Login" />} />
-          <Route path="/search" element={isAuth ? <FriendList key={'search'} option={'users'} /> : <Navigate to="/Login" />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={isAuth ? <StyledRoute><PostsList /></StyledRoute> : <Navigate to="/Login" />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={isAuth ? <StyledRoute><UserProfile sentUser={currentUser} /></StyledRoute> : <Navigate to="/Login" />} />
+        <Route path="/user/:id" element={isAuth ? <StyledRoute><UserProfileWrapper /></StyledRoute> : <Navigate to="/Login" />} />
+        <Route path="/friends" element={isAuth ? <StyledRoute><FriendList option={'friends'} /></StyledRoute> : <Navigate to="/Login" />} />
+        <Route path="/friendRequests" element={isAuth ? <StyledRoute><FriendList option={'received'} /></StyledRoute> : <Navigate to="/Login" />} />
+        <Route path="/postForm" element={isAuth ? <PostForm /> : <Navigate to="/Login" />} />
+        <Route path="/postForm/:id/edit" element={isAuth ? <PostFormEditWrapper /> : <Navigate to="/Login" />} />
+        <Route path="/profile/edit" element={isAuth ? <ProfileFormEdit /> : <Navigate to="/Login" />} />
+        <Route path="/search" element={isAuth ? <StyledRoute><FriendList key={'search'} option={'users'} /></StyledRoute> : <Navigate to="/Login" />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
     </div>
     // </Router>
   );

@@ -14,6 +14,7 @@ export default function Owner({ theUser,date }) {
     if (!theUser) user = currentUser
     else if (theUser.image) user = { ...theUser, image: `http://127.0.0.1:5000/profileImage/${theUser.image}` }
     else user = {...theUser}
+    console.log(user)
     
     return (
         <Link to={`${route}`} className="user-link">

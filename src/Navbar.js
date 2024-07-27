@@ -6,7 +6,7 @@ import defaultProfileImage from './assets/profile.webp'
 import { FaSearch } from 'react-icons/fa';
 import logo from './assets/Connectify.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faPlus, faSignOutAlt, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
     const { AuthToken, logout,currentUser } = useContext(AuthContext)
@@ -94,6 +94,17 @@ export default function Navbar() {
                         <FontAwesomeIcon icon={faHome} className="n-navbar-icon" />
                     </Link>
                 </li>
+                <li className="n-nav-item">
+                    <Link to="/friends" className="n-nav-link">
+                        <FontAwesomeIcon icon={faUserFriends} className="n-navbar-icon" />
+                    </Link>
+                </li>
+                
+                <li className="n-nav-item">
+                    <Link to="/postForm" className="n-nav-link">
+                        <FontAwesomeIcon icon={faPlus} className="n-navbar-icon" />
+                    </Link>
+                </li>
                 {AuthToken && (
                     <li className="n-nav-item">
                         <div onClick={logout} className="n-nav-link">
@@ -101,11 +112,6 @@ export default function Navbar() {
                         </div>
                     </li>
                 )}
-                <li className="n-nav-item">
-                    <Link to="/postForm" className="n-nav-link">
-                        <FontAwesomeIcon icon={faPlus} className="n-navbar-icon" />
-                    </Link>
-                </li>
                 {currentUser && (
                     <li className="n-nav-item">
                         <img
@@ -116,6 +122,7 @@ export default function Navbar() {
                         <Link to="/profile" className="n-nav-user">{currentUser.name}</Link>
                     </li>
                 )}
+                
             </ul>
         </nav>
     );

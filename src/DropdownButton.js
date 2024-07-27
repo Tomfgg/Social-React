@@ -29,7 +29,7 @@ const DropdownButton = ({ settings, id, setDeleted, handleDelete, setEditable })
             <Link to='/profile/edit' className="n-dropdown-item">edit profile</Link>
             <Link to='/friends' className="n-dropdown-item">friends</Link>
             <Link to='/friendRequests' className="n-dropdown-item">received requests</Link>
-            <div className="n-dropdown-item">delete profile</div>
+            {/* <div className="n-dropdown-item">delete profile</div> */}
         </div>
     ) : settings === 'post' ? (
         <div className="n-dropdown-menu">

@@ -61,7 +61,7 @@ export default function FriendList({ option }) {
     //     console.log(users)
     //     return null
     // }
-    if (loading) return <div className="spinner">Loading...</div> // Show loading spinner
+    if (loading) return <div className="spinner"></div> // Show loading spinner
 
     else if (!users || users.length === 0) return <div class="centered-container">
         <div class="centered-message">
