@@ -22,7 +22,7 @@
 
 /* Reply content */
 .reply-content {
-    display: flex;
+    display: inline;
     align-items: center;
     margin-bottom: 8px;
 }
@@ -60,7 +60,7 @@
     width: 50%;
     height: auto;
     border-radius: 15px;
-    margin-bottom: 12px;
+    /* margin-top: 12px; */
 }
 
 /* Reply actions */
@@ -111,4 +111,8 @@
     display: flex;
     align-items: center;
     font-size: 16px;
+}
+.what{
+    display: flex;
+    flex-direction: column;
 }

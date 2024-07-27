@@ -24,20 +24,20 @@ function App() {
     // <Router>
     <div>
       {!shouldHideNavbar && <Navbar />}
-      <Routes>
-        <Route path="/" element={isAuth ? <PostsList /> : <Navigate to="/Login" />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={isAuth ? <UserProfile sentUser={currentUser} /> : <Navigate to="/Login" />} />
-        <Route path="/user/:id" element={isAuth ? <UserProfileWrapper /> : <Navigate to="/Login" />} />
-        <Route path="/friends" element={isAuth ? <FriendList option={'friends'} /> : <Navigate to="/Login" />} />
-        <Route path="/friendRequests" element={isAuth ? <FriendList option={'received'} /> : <Navigate to="/Login" />} />
-        <Route path="/postForm" element={isAuth ? <PostForm /> : <Navigate to="/Login" />} />
-        <Route path="/postForm/:id/edit" element={isAuth ? <PostFormEditWrapper /> : <Navigate to="/Login" />} />
-        <Route path="/profile/edit" element={isAuth ? <ProfileFormEdit /> : <Navigate to="/Login" />} />
-        <Route path="/search" element={isAuth ? <FriendList key={'search'} option={'users'}/> : <Navigate to="/Login" />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={isAuth ? <PostsList /> : <Navigate to="/Login" />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={isAuth ? <UserProfile sentUser={currentUser} /> : <Navigate to="/Login" />} />
+          <Route path="/user/:id" element={isAuth ? <UserProfileWrapper /> : <Navigate to="/Login" />} />
+          <Route path="/friends" element={isAuth ? <FriendList option={'friends'} /> : <Navigate to="/Login" />} />
+          <Route path="/friendRequests" element={isAuth ? <FriendList option={'received'} /> : <Navigate to="/Login" />} />
+          <Route path="/postForm" element={isAuth ? <PostForm /> : <Navigate to="/Login" />} />
+          <Route path="/postForm/:id/edit" element={isAuth ? <PostFormEditWrapper /> : <Navigate to="/Login" />} />
+          <Route path="/profile/edit" element={isAuth ? <ProfileFormEdit /> : <Navigate to="/Login" />} />
+          <Route path="/search" element={isAuth ? <FriendList key={'search'} option={'users'} /> : <Navigate to="/Login" />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
     </div>
     // </Router>
   );
@@ -49,9 +49,9 @@ const UserProfileWrapper = () => {
   return <UserProfile key={id} id={id} />;
 };
 
-const PostFormEditWrapper = ()=>{
+const PostFormEditWrapper = () => {
   const { id } = useParams();
-  return <PostFormEdit id={id}/>
+  return <PostFormEdit id={id} />
 }
 
 export default App;

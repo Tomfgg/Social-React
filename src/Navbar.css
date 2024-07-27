@@ -1,11 +1,11 @@
 /* Navbar container */
-.navbar {
+.n-navbar {
     background-color: #333;
     padding: 1rem;
 }
 
 /* Navbar list */
-.nav-list {
+.n-nav-list {
     list-style: none;
     display: flex;
     justify-content: space-around;
@@ -14,23 +14,21 @@
     padding: 0;
 }
 
-/* Navbar list items */
-
-
 /* Navbar links */
-.nav-link {
+.n-nav-link {
     color: white;
     text-decoration: none;
     font-size: 1rem;
     transition: color 0.3s ease;
+    cursor: pointer;
 }
 
-.nav-link:hover {
+.n-nav-link:hover {
     color: #ddd;
 }
 
 /* Navbar button */
-.nav-button {
+.n-nav-button {
     background-color: #007bff;
     color: white;
     border: none;
@@ -40,51 +38,44 @@
     transition: background-color 0.3s ease;
 }
 
-.nav-button:hover {
+.n-nav-button:hover {
     background-color: #0056b3;
 }
 
 /* Navbar user display */
-
-
-.nav-item {
+.n-nav-item {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    /* Optional: Adjust the gap between the image and the link */
     padding: 10px;
 }
 
-.profile-image {
+.n-profile-image {
     width: 40px;
-    /* Adjust the size as needed */
     height: 40px;
     border-radius: 50%;
+    border: 1.5px solid #fff;
 }
 
-.nav-user {
+.n-nav-user {
     text-decoration: none;
     color: #e8e8e8;
-    /* Adjust the color as needed */
     font-weight: bold;
-    /* Optional: Make the text bold */
 }
 
-.nav-item:hover .nav-user {
-    color: #007BFF;
-    /* Optional: Change color on hover */
+.n-nav-item:hover .n-nav-user {
+    color: #007bff;
 }
 
-.navbar-search {
+.n-navbar-search {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.navbar-search input {
+.n-navbar-search input {
     padding: 10px 20px 10px 40px;
-    /* Add padding to the left for the icon */
     font-size: 1em;
     border: none;
     border-radius: 20px;
@@ -93,13 +84,39 @@
     outline: none;
 }
 
-.navbar-search .search-icon {
+.n-navbar-search .n-search-icon {
     position: absolute;
     left: 10px;
     color: #aaa;
     font-size: 1em;
 }
 
-.navbar-search input::placeholder {
+.n-navbar-search input::placeholder {
     color: #ccc;
+}
+
+.n-navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.n-navbar-logo {
+    height: 40px;
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.n-navbar-icon {
+    font-size: 24px;
+    color: #fff;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+.n-navbar-icon:hover {
+    color: #007bff;
 }

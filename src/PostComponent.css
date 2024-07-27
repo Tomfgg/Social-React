@@ -64,3 +64,42 @@
     gap: 80px;
     /* Adjust this value for the desired space between the like button and the comment button */
 }
+
+
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+
+
+.nav-button {
+    background-color: #007BFF;
+    /* Change to your preferred color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    position: absolute;
+    border-radius: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background-color 0.3s ease;
+}
+
+#prev {
+    left: 10px;
+}
+
+#next {
+    right: 10px;
+}
+
+.nav-button:hover {
+    background-color: #0056b3;
+    /* Darker shade for hover effect */
+}

@@ -1,5 +1,5 @@
-/* Modal.css */
-.modal-overlay {
+/* Modal overlay */
+.n-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -10,9 +10,11 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    z-index: 1000;
 }
 
-.modal-content {
+/* Modal content */
+.n-modal-content {
     background: white;
     padding: 20px;
     border-radius: 8px;
@@ -26,13 +28,18 @@
     position: relative;
 }
 
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+/* Close button */
+.n-close-button {
+    position: fixed;
+    top: 30px;
+    right: 420px;
     border: none;
     background: transparent;
     font-size: 16px;
     cursor: pointer;
 }
-
+.n-close-button:hover{
+    background-color:rgb(176, 176, 181);
+    transition: 0.3s;
+    border-radius: 50%;
+}

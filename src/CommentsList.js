@@ -24,8 +24,9 @@ export default function CommentsList({ noMoreComments,getOtherComments,skip,setS
                     <SingleComment skip={skip} setSkip={setSkip}  commentsSetter={commentsSetter} commentSent={comment} setId={setId} setSymbol={setSymbol} />
                 </div>
             ))}
+                {!noMoreComments && <div style={{cursor:"pointer"}} onClick={getOtherComments}>Show Previous Comments...</div>}
         </ul>
-            {!noMoreComments &&<div onClick={getOtherComments}>Show Previous Comments...</div>}
+            
         </>
     )
 }

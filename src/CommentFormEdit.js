@@ -51,7 +51,7 @@ const CommentFormEdit = ({ comment, setEditable, setComment, type }) => {
         newComment.user_id = {
             _id: currentUser._id,
             name: currentUser.name,
-            image: currentUser.image.replace('http://127.0.0.1:5000/profileImage/', '')
+            image: currentUser.image?.replace('http://127.0.0.1:5000/profileImage/', '')
         }
         console.log(newComment)
         setEditable(false)
@@ -81,13 +81,13 @@ const CommentFormEdit = ({ comment, setEditable, setComment, type }) => {
                 </div>
             ) : (
                 <div className="comment-edit-form-group">
-                    <input type="file" accept="image/*,video/*" onChange={handleFileChange} className="comment-edit-file-input" />
+                    <input type="file" accept="image/*" onChange={handleFileChange} className="comment-edit-file-input" />
                 </div>
             )}
 
             <div className="comment-edit-button-group">
-                <button type="submit" onClick={handleSubmit} className="comment-edit-submit-button">Edit</button>
                 <button type="button" onClick={() => setEditable(false)} className="comment-edit-cancel-button">Cancel</button>
+                <button disabled={!oldFile&&!newFile&&!describtion} type="submit" onClick={handleSubmit} className="comment-edit-submit-button">Edit</button>
             </div>
         </form>
 

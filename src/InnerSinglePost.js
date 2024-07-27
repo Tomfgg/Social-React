@@ -16,6 +16,15 @@ export default function InnerSinglePost({ post, setLikes, setIsLiked, setId, set
     // const [likes, setLikes] = useState(post.likes)
     // const [isLiked, setIsLiked] = useState(post.liked)
     const [reacts, setReacts] = useState(null)
+    const [index, setIndex] = useState(0)
+    if (post.images.length > 0) {
+        var imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
+        var media = imageExtensions.some((ext) => post.images[index].toLowerCase().endsWith(ext)) ?
+            <img className="post-image" src={post.images[index]} /> : <video className="post-image" controls>
+                <source src={post.images[index]} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+    }
     // const [comments, setComments] = useState([])
     // const [skip, setSkip] = useState(0)
     // const [toFetch,setToFetch] = useState(false)
@@ -73,7 +82,11 @@ export default function InnerSinglePost({ post, setLikes, setIsLiked, setId, set
             <Owner theUser={post.user_id} date={post.createdAt} settings={'post'}/>
             {/* {(currentUser._id === post.user_id?._id || !post.user_id) && <DropdownButton settings={'post'} />} */}
             <p className="post-description">{post.describtion}</p>
-            {post.images.length > 0 &&<img src={post.images[0]} alt="Post" className="post-image" />}
+            {(post.images.length > 0) && post.images.length > 1 ? <div className="container">
+                <button disabled={index === post.images.length - 1} onClick={() => setIndex(index + 1)} className="nav-button" id="prev">{'<'}</button>
+                {media}
+                <button disabled={index === 0} onClick={() => setIndex(index - 1)} className="nav-button" id="next">{'>'}</button>
+            </div> : media}
 
             <div className="likes-comments-container">
                  

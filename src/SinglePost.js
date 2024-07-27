@@ -14,6 +14,7 @@ import InnerReactsModal from "./InnerReactsModal"
 import DropdownButton from "./DropdownButton"
 import CommentForm from "./CommentForm"
 import './SinglePost.css'
+import MediaCarousel from './MediaCarousel'
 
 export const CommentsCountContext = createContext(null)
 
@@ -24,14 +25,24 @@ export default function SinglePost({ post, postsSetter, decrementSkip }) {
     const [reacts, setReacts] = useState(null)
     const [comments, setComments] = useState([])
     const [skip, setSkip] = useState(0)
-    const [scrollDisabled,setScrollDisabled] = useState(false)
-    const [noMoreComments,setNoMoreComments] = useState(false)
+    const [scrollDisabled, setScrollDisabled] = useState(false)
+    const [noMoreComments, setNoMoreComments] = useState(false)
     const [id, setId] = useState(null)
     const [symbol, setSymbol] = useState(null)
     const [commentsCount, setCommentsCount] = useState(post.comments)
+    const [index, setIndex] = useState(0)
     // const [skip, setSkip] = useState(0)
     // const [toFetch,setToFetch] = useState(false)
     // console.log(post.user_id.image)
+    if (post.images.length > 0) {
+        var imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
+        var media = imageExtensions.some((ext) => post.images[index].toLowerCase().endsWith(ext)) ?
+            <img className="post-image" src={post.images[index]} /> : <video className="post-image" controls>
+                <source src={post.images[index]} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+    }
+
     console.log(post)
     console.log(comments)
 
@@ -40,7 +51,7 @@ export default function SinglePost({ post, postsSetter, decrementSkip }) {
     }
 
     const decrementComments = (newCount) => {
-        if (newCount) setCommentsCount(newCount)
+        if (newCount || newCount === 0) setCommentsCount(newCount)
         else setCommentsCount(commentsCount - 1)
     }
 
@@ -49,7 +60,7 @@ export default function SinglePost({ post, postsSetter, decrementSkip }) {
 
     const handleNewComment = (addedComment) => {
         setComments([addedComment, ...comments])
-        setSkip(skip+1)
+        setSkip(skip + 1)
     }
 
     const openModal = async () => {
@@ -59,12 +70,12 @@ export default function SinglePost({ post, postsSetter, decrementSkip }) {
                 'Authorization': `Bearer ${AuthToken}`,
             },
         })
-        if(newComments.ok) {
+        if (newComments.ok) {
             newComments = await newComments.json()
             if (newComments.length < 5) setNoMoreComments(true)
             console.log(newComments)
             setComments([...newComments])
-            if(scrollDisabled) setScrollDisabled(false)
+            if (scrollDisabled) setScrollDisabled(false)
             setSkip(skip + 5)
         }
         else setScrollDisabled(true)
@@ -84,7 +95,7 @@ export default function SinglePost({ post, postsSetter, decrementSkip }) {
                 if (otherComments.length < 5) setNoMoreComments(true)
                 console.log(otherComments)
                 setComments([...comments, ...otherComments])
-                setSkip(skip+5)
+                setSkip(skip + 5)
             }
         }
     }
@@ -167,7 +178,11 @@ export default function SinglePost({ post, postsSetter, decrementSkip }) {
                     <DropdownButton settings={'post'} id={post._id} handleDelete={handleDeletePost} />}
             </div>
             <p className="post-description">{post.describtion}</p>
-            {post.images.length > 0 && <img src={post.images[0]} alt="Post" className="post-image" />}
+            {(post.images.length > 0) && post.images.length > 1 ? <div className="container">
+                <button disabled={index === post.images.length - 1} onClick={() => setIndex(index + 1)} className="nav-button" id="prev">{'<'}</button>
+                {media}
+                <button disabled={index === 0} onClick={() => setIndex(index - 1)} className="nav-button" id="next">{'>'}</button>
+            </div> : media}
 
             <div className="likes-comments-container">
 

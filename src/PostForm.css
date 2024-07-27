@@ -1,7 +1,16 @@
+/* Parent container to center the form vertically */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    background-color: #f0f0f0;
+}
+
+/* Form styling */
 .post-add-form {
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -9,6 +18,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Form group styling */
 .form-group {
     margin-bottom: 20px;
 }
@@ -20,8 +30,9 @@
 }
 
 .form-group textarea {
-    width: 100%;
-    height: 100px;
+    width: 90%;
+    max-height: 70px;
+    min-height: 70px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -32,6 +43,7 @@
     display: block;
 }
 
+/* Preview styling */
 .preview {
     margin-top: 20px;
 }
@@ -40,36 +52,57 @@
     margin-bottom: 10px;
 }
 
+.preview-items {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
 .preview-item {
+    position: relative;
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
 }
 
 .preview-item img,
 .preview-item video {
     margin-right: 10px;
-    border: 1px solid #ddd;
     border-radius: 4px;
 }
 
+/* Button styling */
 .preview-item button {
-    padding: 4px 8px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 2px 6px;
     border: none;
     background-color: #ff4d4d;
     color: #fff;
-    border-radius: 4px;
+    border-radius: 50%;
     cursor: pointer;
+    font-size: 12px;
+    line-height: 1;
 }
 
 .preview-item button:hover {
     background-color: #e60000;
 }
 
+/* Form buttons container */
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Submit button styling */
 .submit-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
     background-color: #007bff;
     color: #fff;
@@ -80,4 +113,19 @@
 
 .submit-button:hover {
     background-color: #0056b3;
+}
+
+/* Cancel button styling */
+.cancel-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #ff4d4d;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    background-color: #e60000;
 }

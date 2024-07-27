@@ -81,7 +81,7 @@ export default function SingleReply({ replySent, setId, setSymbol, setIsReplyFor
                     <DropdownButton setEditable={setEditable} handleDelete={handleDeleteReply} settings={'reply'} />
                 )}
             </div>
-
+                <div className="what">
             <div className="reply-content">
                 {reply.toWhoName && (
                     <Link to={`/user/${reply.toWhoID}`} className="reply-link">
@@ -92,6 +92,7 @@ export default function SingleReply({ replySent, setId, setSymbol, setIsReplyFor
             </div>
 
             {reply.file && <img src={reply.file} alt="Reply" className="reply-image" />}
+            </div>
 
             <div className="reply-actions">
                 <LikeButton

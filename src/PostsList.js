@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "./AuthProvider";
 import SinglePost from "./SinglePost";
 import './PostsList.css'
+import Button from 'react-bootstrap/Button';
 
 export default function PostsList({ editable, whosePosts }) {
     const { AuthToken } = useContext(AuthContext)
@@ -64,6 +65,6 @@ export default function PostsList({ editable, whosePosts }) {
                 )
             }
         </ul>
-        {!noMorePosts && <div className="show-more" onClick={importSomePosts}>Show More</div>}
+        {!noMorePosts && <Button className="show-more outline-secondary" onClick={importSomePosts}>Show More</Button>}
     </>)
 }

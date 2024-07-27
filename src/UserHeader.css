@@ -48,23 +48,47 @@
 }
 
 .user-header .friend {
-    background-color: #28a745;
+    background-color: #dedddd;
 }
 
 .user-header .cancel-request {
     background-color: #ffc107;
+    transition: background-color 0.3s;
+}
+
+.user-header .cancel-request:hover {
+    background-color: #e0a800;
+    /* Darker shade for hover effect */
 }
 
 .user-header .accept {
     background-color: #007bff;
+    transition: background-color 0.3s;
+}
+
+.user-header .accept:hover {
+    background-color: #0056b3;
+    /* Darker shade for hover effect */
 }
 
 .user-header .reject {
     background-color: #dc3545;
+    transition: background-color 0.3s;
+}
+
+.user-header .reject:hover {
+    background-color: #c82333;
+    /* Darker shade for hover effect */
 }
 
 .user-header .add-friend {
     background-color: #17a2b8;
+    transition: background-color 0.3s;
+}
+
+.user-header .add-friend:hover {
+    background-color: #138496;
+    /* Darker shade for hover effect */
 }
 
 .user-header .dropdown-button {

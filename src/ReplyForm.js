@@ -49,7 +49,7 @@ const ReplyForm = ({ commentId, handleAddedReply, user, setIsReplyFormVisible })
             addedReply.user_id = {
                 _id: currentUser._id,
                 name: currentUser.name,
-                image: currentUser.image.replace("http://127.0.0.1:5000/profileImage/", "")
+                image: currentUser.image?.replace("http://127.0.0.1:5000/profileImage/", "")
             }
             console.log(addedReply);        
             // Handle success (e.g., clear the form, show a success message, etc.)
@@ -75,7 +75,10 @@ const ReplyForm = ({ commentId, handleAddedReply, user, setIsReplyFormVisible })
             </div>
             
             <div className="form-group flex">
-                <input type="file" accept="image/*" onChange={handleFileChange} />
+                {!file ? <input type="file" accept="image/*" onChange={handleFileChange} className="pxfile-input" /> : <div className="pxcomment-edit-file-preview">
+                    <img src={URL.createObjectURL(file)} alt="New File" className="pxcomment-edit-preview-image" />
+                    <button type="button" onClick={() => setFile(null)} className="pxcomment-edit-remove-button">Remove</button>
+                </div>}
                 <button type="submit" className="submit-button">Reply</button>
             </div>
             {/* <CloseButton /> */}

@@ -1,4 +1,4 @@
-import { useContext, useState,useEffect } from "react"
+import { useContext, useState, useEffect } from "react"
 import { AuthContext } from "./AuthProvider";
 import defaultProfileImage from './assets/profile.webp'
 import { Link, redirect, useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ const ProfileFormEdit = () => {
     const [oldImage, setOldImage] = useState(null)
     const [newImage, setNewImage] = useState(null)
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null)
 
     useEffect(() => {
         if (currentUser) {
@@ -53,6 +54,15 @@ const ProfileFormEdit = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (name.length < 3 || name.length > 15) {
+            setError('Username should have be between 3 and 15 characters');
+            return;
+        }
+        const nameRegex = /^(?! )[A-Za-z]+(?: [A-Za-z]+)*(?<! )$/;
+        if (!nameRegex.test(name)) {
+            setError('Invalid name');
+            return;
+        }
         // Handle form submission
         const formData = new FormData();
         formData.append('name', name);
@@ -75,36 +85,42 @@ const ProfileFormEdit = () => {
 
         console.log(newProfile)
         // setEditable(false)
-        setCurrentUser({...newProfile,friends:currentUser.friends})
+        setCurrentUser({ ...newProfile, friends: currentUser.friends })
         navigate('/profile');
     }
 
     return (
-        <form className="comment-form" onSubmit={handleSubmit}>
-            <div className="form-group">
-                <label htmlFor="name">Name:</label>
-                <input
-                    type="text"
-                    id="name"
-                    value={name}
-                    onChange={handleNameChange}
-                    className="form-control"
-                />
-            </div>
-
-            {src && (
-                <div className="image-container">
-                    <img src={src} width="100" className="preview-image" />
-                    {(oldImage||newImage)&&<button type="button" onClick={handleRemove} className="remove-button">X</button>}
+        <div className="container">
+            <form className="comment-form" onSubmit={handleSubmit}>
+                <div>
+                    <div className="form-group name-group">
+                        <label htmlFor="name">Name:</label> 
+                        <input
+                            type="text"
+                            id="name"
+                            value={name}
+                            onChange={handleNameChange}
+                            className="form-control"
+                        />
+                    </div>
+                    {error && <div className="error">{error}</div>}
                 </div>
-            )}
-            <input type="file" accept="image/*" onChange={handleFileChange} className="file-input" />
+                {src && (
+                    <div className="image-container">
+                        <img src={src} width="100" className="preview-image" />
+                        {(oldImage || newImage) && (
+                            <button type="button" onClick={handleRemove} className="remove-button">X</button>
+                        )}
+                    </div>
+                )}
+                <input type="file" accept="image/*" onChange={handleFileChange} className="file-input" />
 
-            <div className="button-group">
-                <button type="submit" disabled={!name} className="submit-button">Update</button>
-                <Link to={'/profile'} className="cancel-link">Cancel</Link>
-            </div>
-        </form>
+                <div className="button-group">
+                    <Link to={'/profile'} className="cancel-link">Cancel</Link>
+                    <button type="submit" disabled={!name} className="submit-button">Update</button>
+                </div>
+            </form>
+        </div>
     );
 };
 

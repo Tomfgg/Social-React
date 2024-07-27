@@ -6,9 +6,9 @@
     margin: 20px auto;
     /* Center the element horizontally with auto margin */
     padding: 10px 20px;
-    background-color: #007bff;
+    /* background-color: #007bff; */
     /* Background color */
-    color: white;
+    /* color: white; */
     /* Text color */
     border-radius: 5px;
     /* Rounded corners */
@@ -24,7 +24,6 @@
     /* Smooth transition for background color */
 }
 
-.show-more:hover {
+/* .show-more:hover {
     background-color: #0056b3;
-    /* Darker background on hover */
-}
+} */

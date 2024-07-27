@@ -14,7 +14,7 @@
 /* Post header */
 .post-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     align-items: center;
     margin-bottom: 8px;
 }
@@ -38,7 +38,7 @@
     width: 50%;
     height: auto;
     border-radius: 15px;
-    margin-bottom: 12px;
+    margin-top: 12px;
 }
 
 /* Actions container */

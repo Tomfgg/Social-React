@@ -4,6 +4,9 @@ import { AuthContext } from './AuthProvider';
 import './Navbar.css';
 import defaultProfileImage from './assets/profile.webp'
 import { FaSearch } from 'react-icons/fa';
+import logo from './assets/Connectify.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faPlus, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navbar() {
     const { AuthToken, logout,currentUser } = useContext(AuthContext)
@@ -68,39 +71,16 @@ export default function Navbar() {
 
     
     return (
-        <nav className="navbar">
-            <ul className="nav-list">
-                <li className="nav-item">
-                    <Link to="/" className="nav-link">Home</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/about" className="nav-link">About</Link>
-                </li>
-                <li className="nav-item">
-                    <Link to="/contact" className="nav-link">Contact</Link>
-                </li>
-                {AuthToken && (
-                    <li className="nav-item">
-                        <button onClick={logout} className="nav-button">Logout</button>
-                    </li>
-                )}
-                {currentUser && (
-                    <li className="nav-item">
-                        <img
-                            src={currentUser.image || defaultProfileImage}
-                            alt={`${currentUser.name}'s profile`}
-                            className="profile-image"
-                        />
-                        <Link to="/profile" className="nav-user">{currentUser.name}</Link>
-                    </li>
-                )}
-                <li className="nav-item">
-                    <Link to="/postForm" className="nav-link">Add Post</Link>
-                </li>
-
-                <li className="nav-item">
-                    <form className="navbar-search" onSubmit={handleSearchSubmit}>
-                        <FaSearch className="search-icon" />
+        <nav className="n-navbar">
+            <ul className="n-nav-list">
+                <li className="n-nav-item">
+                    <div className="n-navbar-brand">
+                        <Link to="/">
+                            <img src={logo} alt="SocialApp Logo" className="n-navbar-logo" />
+                        </Link>
+                    </div>
+                    <form className="n-navbar-search" onSubmit={handleSearchSubmit}>
+                        <FaSearch className="n-search-icon" />
                         <input
                             type="text"
                             placeholder="Search for users"
@@ -109,7 +89,33 @@ export default function Navbar() {
                         />
                     </form>
                 </li>
-
+                <li className="n-nav-item">
+                    <Link to="/" className="n-nav-link">
+                        <FontAwesomeIcon icon={faHome} className="n-navbar-icon" />
+                    </Link>
+                </li>
+                {AuthToken && (
+                    <li className="n-nav-item">
+                        <div onClick={logout} className="n-nav-link">
+                            <FontAwesomeIcon icon={faSignOutAlt} className="n-navbar-icon" />
+                        </div>
+                    </li>
+                )}
+                <li className="n-nav-item">
+                    <Link to="/postForm" className="n-nav-link">
+                        <FontAwesomeIcon icon={faPlus} className="n-navbar-icon" />
+                    </Link>
+                </li>
+                {currentUser && (
+                    <li className="n-nav-item">
+                        <img
+                            src={currentUser.image || defaultProfileImage}
+                            alt={`${currentUser.name}'s profile`}
+                            className="n-profile-image"
+                        />
+                        <Link to="/profile" className="n-nav-user">{currentUser.name}</Link>
+                    </li>
+                )}
             </ul>
         </nav>
     );

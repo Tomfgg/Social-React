@@ -1,0 +1,33 @@
+/* CarouselWithVideo.css */
+
+/* Ensure carousel controls are above the video */
+.carousel-control-prev,
+.carousel-control-next {
+    z-index: 10;
+}
+
+/* Ensure the play button and media controls are above the carousel controls */
+video::-webkit-media-controls {
+    z-index: 20;
+}
+
+video::-webkit-media-controls-play-button {
+    z-index: 20;
+}
+
+/* Position carousel controls to avoid interference with video controls */
+.carousel-control-prev {
+    left: 10px;
+    /* Adjust as necessary */
+}
+
+.carousel-control-next {
+    right: 10px;
+    /* Adjust as necessary */
+}
+
+/* Make sure the video element fits the container properly */
+.carousel-item video {
+    width: 100%;
+    height: auto;
+}

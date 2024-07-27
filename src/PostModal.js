@@ -18,12 +18,11 @@ function PostModal({ isVisible, onClose, children }) {
     if (!isVisible) return null;
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
-                <button className="close-button" onClick={onClose}>X</button>
+        <div className="n-modal-overlay" onClick={onClose}>
+            <div className="n-modal-content" onClick={e => e.stopPropagation()}>
+                <button className="n-close-button" onClick={onClose}>X</button>
                 {children}
             </div>
-            
         </div>
     );
 }
