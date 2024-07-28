@@ -11,7 +11,7 @@ export default function LikeButton({ isLiked, setIsLiked, id, setLikes, likes, s
         const newLikesCount = isLiked ? likes - 1 : likes + 1;
         setLikes(newLikesCount);
         setIsLiked(!isLiked);
-        fetch(`http://127.0.0.1:5000/likes/${symbol}/${id}`, {
+        fetch(`https://social-app-f6f0.onrender.com/likes/${symbol}/${id}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${AuthToken}`,

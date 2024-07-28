@@ -12,7 +12,7 @@ const DropdownButton = ({ settings, id, setDeleted, handleDelete, setEditable })
     };
 
     const handleRemoveFriend = () => {
-        fetch(`http://127.0.0.1:5000/friends/${id}`, {
+        fetch(`https://social-app-f6f0.onrender.com/friends/${id}`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${AuthToken}`

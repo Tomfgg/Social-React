@@ -8,7 +8,7 @@ export default function InnerReactsModal({ id, symbol,setId,setSymbol }) {
     useEffect(()=>{
         const fetchReacts = async () => {
             if(!id && !symbol) return null
-            let reacts = await fetch(`http://127.0.0.1:5000/users/${symbol}/${id}`)
+            let reacts = await fetch(`https://social-app-f6f0.onrender.com/users/${symbol}/${id}`)
             reacts = await reacts.json()
             setReacts(reacts)
         }
@@ -16,7 +16,7 @@ export default function InnerReactsModal({ id, symbol,setId,setSymbol }) {
     }, [id,symbol])
 
     // const fetchReacts = async () => {
-    //     let reacts = await fetch(`http://127.0.0.1:5000/users/${symbol}/${id}`)
+    //     let reacts = await fetch(`https://social-app-f6f0.onrender.com/users/${symbol}/${id}`)
     //     reacts = await reacts.json()
     //     setReacts(reacts)
     // }

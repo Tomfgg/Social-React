@@ -30,7 +30,7 @@ const CommentForm = ({ postId, handleAddedComment, id }) => {
         }
         console.log(postId)
         try {
-            const response = await fetch(`http://127.0.0.1:5000/comments/${postId}`, {
+            const response = await fetch(`https://social-app-f6f0.onrender.com/comments/${postId}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${AuthToken}`,
@@ -47,7 +47,7 @@ const CommentForm = ({ postId, handleAddedComment, id }) => {
             addedComment.user_id = {
                 _id: currentUser._id,
                 name: currentUser.name,
-                image: currentUser.image?.replace("http://127.0.0.1:5000/profileImage/", "")
+                image: currentUser.image?.replace("https://social-app-f6f0.onrender.com/profileImage/", "")
             }
             console.log(addedComment);
             // Handle success (e.g., clear the form, show a success message, etc.)

@@ -74,7 +74,7 @@ const ProfileFormEdit = () => {
         // formData.append('oldFile', oldFile); // 'files' is the key for your files array
 
 
-        let newProfile = await fetch(`http://127.0.0.1:5000/users`, {
+        let newProfile = await fetch(`https://social-app-f6f0.onrender.com/users`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${AuthToken}`, // Ensure AuthToken is defined and valid

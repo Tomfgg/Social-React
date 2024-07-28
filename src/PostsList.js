@@ -9,10 +9,11 @@ export default function PostsList({ editable, whosePosts }) {
     const [posts, setPosts] = useState(null)
     const [skip, setSkip] = useState(0)
     const [noMorePosts, setNoMorePosts] = useState(false)
+    console.log(AuthToken)
     if (!whosePosts) whosePosts = ''
     useEffect(() => {
         async function fetchPosts() {
-            let posts = await fetch(`http://127.0.0.1:5000/posts/${whosePosts}?skip=${skip}`, {
+            let posts = await fetch(`https://social-app-f6f0.onrender.com/posts/${whosePosts}?skip=${skip}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${AuthToken}`,
@@ -40,7 +41,7 @@ export default function PostsList({ editable, whosePosts }) {
 
     const importSomePosts = async () => {
         if (!noMorePosts) {
-            let newPosts = await fetch(`http://127.0.0.1:5000/posts/${whosePosts}?skip=${skip}`, {
+            let newPosts = await fetch(`https://social-app-f6f0.onrender.com/posts/${whosePosts}?skip=${skip}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${AuthToken}`,

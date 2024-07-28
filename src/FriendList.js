@@ -23,7 +23,7 @@ export default function FriendList({ option }) {
         const fetchFriends = async () => {
             let response
             if (option === 'friends') {
-               response = await fetch('http://127.0.0.1:5000/friends', {
+               response = await fetch('https://social-app-f6f0.onrender.com/friends', {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${AuthToken}`
@@ -32,7 +32,7 @@ export default function FriendList({ option }) {
             }
             else if (option === 'users') {
                 console.log('a7a')
-                response = await fetch(`http://127.0.0.1:5000/users/search/?q=${searchQuery}`, {
+                response = await fetch(`https://social-app-f6f0.onrender.com/users/search/?q=${searchQuery}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${AuthToken}`
@@ -41,7 +41,7 @@ export default function FriendList({ option }) {
             }
 
             else {
-               response = await fetch('http://127.0.0.1:5000/friends/received', {
+               response = await fetch('https://social-app-f6f0.onrender.com/friends/received', {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${AuthToken}`
@@ -88,7 +88,7 @@ function SingleUserRecord({ user, option }) {
     const [deleted, setDeleted] = useState(false)
 
     const handleAcceptFriend = () => {
-        fetch(`http://127.0.0.1:5000/friends/accept/${theUser._id}`, {
+        fetch(`https://social-app-f6f0.onrender.com/friends/accept/${theUser._id}`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${AuthToken}`
@@ -99,7 +99,7 @@ function SingleUserRecord({ user, option }) {
     }
 
     const handleRejectFriend = () => {
-        fetch(`http://127.0.0.1:5000/friends/reject/${theUser._id}`, {
+        fetch(`https://social-app-f6f0.onrender.com/friends/reject/${theUser._id}`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${AuthToken}`

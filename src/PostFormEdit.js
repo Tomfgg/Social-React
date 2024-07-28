@@ -19,7 +19,7 @@ const PostFormEdit = (id) => {
     useEffect(() => {
         async function fetchPost() {
             console.log(id.id)
-            let post = await fetch(`http://127.0.0.1:5000/posts/${id.id}`, {
+            let post = await fetch(`https://social-app-f6f0.onrender.com/posts/${id.id}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${AuthToken}`
@@ -59,7 +59,7 @@ const PostFormEdit = (id) => {
 
     const handleRemoveOldFile = (theFile) => {
         setOldFiles(oldFiles.filter((file) => file !== theFile));
-        setDeletedFiles([...deletedFiles, (theFile.replace('http://127.0.0.1:5000/postfile/', ''))])
+        setDeletedFiles([...deletedFiles, (theFile.replace('https://social-app-f6f0.onrender.com/postfile/', ''))])
         if (fullfilled) setFullfilled(false)
     };
 
@@ -80,7 +80,7 @@ const PostFormEdit = (id) => {
         });
 
 
-        await fetch(`http://127.0.0.1:5000/posts/${id.id}`, {
+        await fetch(`https://social-app-f6f0.onrender.com/posts/${id.id}`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${AuthToken}`, // Ensure AuthToken is defined and valid

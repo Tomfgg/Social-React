@@ -39,7 +39,7 @@ const CommentFormEdit = ({ comment, setEditable, setComment, type }) => {
         // formData.append('oldFile', oldFile); // 'files' is the key for your files array
 
 
-        let newComment = await fetch(`http://127.0.0.1:5000/${type}/${comment._id}`, {
+        let newComment = await fetch(`https://social-app-f6f0.onrender.com/${type}/${comment._id}`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${AuthToken}`, // Ensure AuthToken is defined and valid
@@ -47,11 +47,11 @@ const CommentFormEdit = ({ comment, setEditable, setComment, type }) => {
             body: formData,
         });
         newComment = await newComment.json()
-        // if (newComment.file) newComment.file = 'http://127.0.0.1:5000/commentfile/' + newComment.file
+        // if (newComment.file) newComment.file = 'https://social-app-f6f0.onrender.com/commentfile/' + newComment.file
         newComment.user_id = {
             _id: currentUser._id,
             name: currentUser.name,
-            image: currentUser.image?.replace('http://127.0.0.1:5000/profileImage/', '')
+            image: currentUser.image?.replace('https://social-app-f6f0.onrender.com/profileImage/', '')
         }
         console.log(newComment)
         setEditable(false)

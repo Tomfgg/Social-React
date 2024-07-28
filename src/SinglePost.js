@@ -64,7 +64,7 @@ export default function SinglePost({ post, postsSetter, decrementSkip }) {
     }
 
     const openModal = async () => {
-        let newComments = await fetch(`http://127.0.0.1:5000/comments/${post._id}?skip=${skip}`, {
+        let newComments = await fetch(`https://social-app-f6f0.onrender.com/comments/${post._id}?skip=${skip}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${AuthToken}`,
@@ -84,7 +84,7 @@ export default function SinglePost({ post, postsSetter, decrementSkip }) {
 
     const getOtherComments = async () => {
         if (!scrollDisabled) {
-            let otherComments = await fetch(`http://127.0.0.1:5000/comments/${post._id}?skip=${skip}`, {
+            let otherComments = await fetch(`https://social-app-f6f0.onrender.com/comments/${post._id}?skip=${skip}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${AuthToken}`,
@@ -108,7 +108,7 @@ export default function SinglePost({ post, postsSetter, decrementSkip }) {
     };
 
     const openReactsModal = async () => {
-        let reacts = await fetch(`http://127.0.0.1:5000/users/Post/${post._id}`)
+        let reacts = await fetch(`https://social-app-f6f0.onrender.com/users/Post/${post._id}`)
         reacts = await reacts.json()
         setReacts(reacts)
         setIsReactsModalVisible(true)
@@ -120,7 +120,7 @@ export default function SinglePost({ post, postsSetter, decrementSkip }) {
     }
 
     const showReacts = async () => {
-        let reacts = await fetch(`http://127.0.0.1:5000/users/Post/${post._id}`)
+        let reacts = await fetch(`https://social-app-f6f0.onrender.com/users/Post/${post._id}`)
         reacts = await reacts.json()
         setReacts(reacts)
     }
@@ -130,7 +130,7 @@ export default function SinglePost({ post, postsSetter, decrementSkip }) {
     }
 
     const showComments = async () => {
-        let newComments = await fetch(`http://127.0.0.1:5000/comments/${post._id}?skip=0`, {
+        let newComments = await fetch(`https://social-app-f6f0.onrender.com/comments/${post._id}?skip=0`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${AuthToken}`,
@@ -143,7 +143,7 @@ export default function SinglePost({ post, postsSetter, decrementSkip }) {
     }
 
     const handleDeletePost = () => {
-        fetch(`http://127.0.0.1:5000/posts/${post._id}`, {
+        fetch(`https://social-app-f6f0.onrender.com/posts/${post._id}`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${AuthToken}`
@@ -156,7 +156,7 @@ export default function SinglePost({ post, postsSetter, decrementSkip }) {
     // useEffect(()=>{
     //     if(toFetch) {
     //         const showReacts = async () => {
-    //             let reacts = await fetch(`http://127.0.0.1:5000/users/Post/${post._id}`)
+    //             let reacts = await fetch(`https://social-app-f6f0.onrender.com/users/Post/${post._id}`)
     //             reacts = await reacts.json()
     //             setReacts(reacts)
     //         }

@@ -27,7 +27,7 @@ export default function SingleReply({ replySent, setId, setSymbol, setIsReplyFor
     // const [replies, setReplies] = useState([])
 
     const showReacts = async () => {
-        let reacts = await fetch(`http://127.0.0.1:5000/users/Comment/${reply._id}`)
+        let reacts = await fetch(`https://social-app-f6f0.onrender.com/users/Comment/${reply._id}`)
         reacts = await reacts.json()
         setReacts(reacts)
     }
@@ -40,7 +40,7 @@ export default function SingleReply({ replySent, setId, setSymbol, setIsReplyFor
         setSymbol('Reply')
     }
     // const showReplies = async () => {
-    //     let newReplies = await fetch(`http://127.0.0.1:5000/comments/${comment._id}?skip=0`, {
+    //     let newReplies = await fetch(`https://social-app-f6f0.onrender.com/comments/${comment._id}?skip=0`, {
     //         method: 'GET',
     //         headers: {
     //             'Authorization': `Bearer ${AuthToken}`,
@@ -57,7 +57,7 @@ export default function SingleReply({ replySent, setId, setSymbol, setIsReplyFor
     }
 
     const handleDeleteReply = () => {
-        fetch(`http://127.0.0.1:5000/replies/${reply._id}`, {
+        fetch(`https://social-app-f6f0.onrender.com/replies/${reply._id}`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${AuthToken}`

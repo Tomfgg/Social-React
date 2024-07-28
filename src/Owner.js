@@ -12,7 +12,7 @@ export default function Owner({ theUser,date }) {
     const { currentUser } = useContext(AuthContext)
     console.log(route)
     if (!theUser) user = currentUser
-    else if (theUser.image) user = { ...theUser, image: `http://127.0.0.1:5000/profileImage/${theUser.image}` }
+    else if (theUser.image) user = { ...theUser, image: `https://social-app-f6f0.onrender.com/profileImage/${theUser.image}` }
     else user = {...theUser}
     console.log(user)
     

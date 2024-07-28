@@ -33,7 +33,7 @@ const ReplyForm = ({ commentId, handleAddedReply, user, setIsReplyFormVisible })
         }
         console.log(commentId)
         try {
-            const response = await fetch(`http://127.0.0.1:5000/replies/${commentId}`, {
+            const response = await fetch(`https://social-app-f6f0.onrender.com/replies/${commentId}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${AuthToken}`,
@@ -49,7 +49,7 @@ const ReplyForm = ({ commentId, handleAddedReply, user, setIsReplyFormVisible })
             addedReply.user_id = {
                 _id: currentUser._id,
                 name: currentUser.name,
-                image: currentUser.image?.replace("http://127.0.0.1:5000/profileImage/", "")
+                image: currentUser.image?.replace("https://social-app-f6f0.onrender.com/profileImage/", "")
             }
             console.log(addedReply);        
             // Handle success (e.g., clear the form, show a success message, etc.)

@@ -40,7 +40,7 @@ const PostForm = () => {
             formData.append('file', file); // 'files' is the key for your files array
         });
 
-        await fetch('http://127.0.0.1:5000/posts', {
+        await fetch('https://social-app-f6f0.onrender.com/posts', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${AuthToken}`, // Ensure AuthToken is defined and valid

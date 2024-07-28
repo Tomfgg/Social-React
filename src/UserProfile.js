@@ -42,7 +42,7 @@ function UserHeader({ id, sentUser }) {
 
     else {
         const handleAddFriend = () => {
-             fetch(`http://127.0.0.1:5000/friends/${id}`, {
+             fetch(`https://social-app-f6f0.onrender.com/friends/${id}`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${AuthToken}`
@@ -52,7 +52,7 @@ function UserHeader({ id, sentUser }) {
         }
 
         const handleAcceptFriend = () => {
-            fetch(`http://127.0.0.1:5000/friends/accept/${id}`, {
+            fetch(`https://social-app-f6f0.onrender.com/friends/accept/${id}`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${AuthToken}`
@@ -63,7 +63,7 @@ function UserHeader({ id, sentUser }) {
         }
 
         const handleRejectFriend = () => {
-            fetch(`http://127.0.0.1:5000/friends/reject/${id}`, {
+            fetch(`https://social-app-f6f0.onrender.com/friends/reject/${id}`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${AuthToken}`
@@ -73,7 +73,7 @@ function UserHeader({ id, sentUser }) {
         }
 
        const handleCancelRequest = ()=>{
-           fetch(`http://127.0.0.1:5000/friends/withdraw/${id}`, {
+           fetch(`https://social-app-f6f0.onrender.com/friends/withdraw/${id}`, {
                method: 'POST',
                headers: {
                    Authorization: `Bearer ${AuthToken}`
@@ -83,7 +83,7 @@ function UserHeader({ id, sentUser }) {
        }
 
         const fetchUser = async () => {
-            let response = await fetch(`http://127.0.0.1:5000/users/${id}`, {
+            let response = await fetch(`https://social-app-f6f0.onrender.com/users/${id}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${AuthToken}`
@@ -102,7 +102,7 @@ function UserHeader({ id, sentUser }) {
         console.log(user)
         return (
         <div className="user-header">
-                <img src={user && user.image ? `http://127.0.0.1:5000/profileImage/${user.image}` : defaultProfileImage} alt="Profile" />
+                <img src={user && user.image ? `https://social-app-f6f0.onrender.com/profileImage/${user.image}` : defaultProfileImage} alt="Profile" />
             <div className="user-info">
                 <div className="user-name">{user ? user.name : 'Loading...'}</div>
                     {user && user.relation === 'friend' && <button className="friend">Friend</button>}

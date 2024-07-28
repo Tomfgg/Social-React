@@ -34,7 +34,7 @@ export default function SingleComment({ skip, setSkip, commentSent, setId, setSy
     console.log(comment.user_id.image)
     console.log(isLiked)
     const showReacts = async () => {
-        let reacts = await fetch(`http://127.0.0.1:5000/users/Comment/${comment._id}`)
+        let reacts = await fetch(`https://social-app-f6f0.onrender.com/users/Comment/${comment._id}`)
         reacts = await reacts.json()
         setReacts(reacts)
     }
@@ -54,7 +54,7 @@ export default function SingleComment({ skip, setSkip, commentSent, setId, setSy
     }
 
     const showReplies = async () => {
-        let newReplies = await fetch(`http://127.0.0.1:5000/replies/${comment._id}?skip=0`, {
+        let newReplies = await fetch(`https://social-app-f6f0.onrender.com/replies/${comment._id}?skip=0`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${AuthToken}`,
@@ -73,7 +73,7 @@ export default function SingleComment({ skip, setSkip, commentSent, setId, setSy
     }
 
     const handleDeleteComment = async () => {
-        let response = await fetch(`http://127.0.0.1:5000/comments/${comment._id}`, {
+        let response = await fetch(`https://social-app-f6f0.onrender.com/comments/${comment._id}`, {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${AuthToken}`

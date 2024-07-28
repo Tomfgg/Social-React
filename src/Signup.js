@@ -50,7 +50,7 @@ export default function Signup() {
 
         // TODO: Implement form submission logic (e.g., send data to server)
         try {
-            const response = await fetch('http://127.0.0.1:5000/users', {
+            const response = await fetch('https://social-app-f6f0.onrender.com/users', {
                 method: 'POST', // HTTP method
                 headers: {
                     'Content-Type': 'application/json',

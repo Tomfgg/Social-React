@@ -9,7 +9,7 @@ export default function AuthProvider({ children }) {
     useEffect(() => {
         if (!AuthToken) return setCurrentUser(null)
         async function getUser() {
-            let response = await fetch('http://127.0.0.1:5000/users', {
+            let response = await fetch('https://social-app-f6f0.onrender.com/users', {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${AuthToken}`
