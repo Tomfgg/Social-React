@@ -1,12 +1,12 @@
 ## Demo: ( https://drive.google.com/drive/home )
 ## see the app live at: ( https://papaya-biscotti-fb9ea6.netlify.app )
 ### users you can use while browsing the app: 
-1- ahmed
-  email: ahmed@gmail.com
-  password: 12345
-2- omar
-  email: omar@gmail.com
-  password: 12345
+1- ahmed.\
+  email: ahmed@gmail.com.\
+  password: 12345.\
+2- omar.\
+  email: omar@gmail.com.\
+  password: 12345.\
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
